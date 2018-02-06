@@ -45,7 +45,7 @@ To plot the point cloud data we will be serving of an external software: Xquartz
 plot(las, color="Intensity", colorPalette = terrain.colors(50), trim=0.95)
 ```
 
-![pointCloud](figures/pointCloud.png)
+![pointCloud](../figures/pointCloud.png)
 
 
 You can also overimpose an rgb raster on top of it
@@ -82,7 +82,7 @@ Unfortunately, LiDAR point cloud data may be noisy. This means we would be willi
 ```{r}
 plot(chm)
 ```
-![chmNoSmooth](./figures/chm_no_filter.png)
+![chmNoSmooth](../figures/chm_no_filter.png)
 
 
 ```{r}
@@ -94,7 +94,7 @@ chm = raster::focal(chm, w = kernel, fun = mean)
 ```{r}
 plot(chm)
 ```
-![chmSmooth](figures/chm_smooth.png)
+![chmSmooth](../figures/chm_smooth.png)
 
 Now, let's try to apply a crown delineation algorithm (Silva et al., 2016). First of all we will need to look for the highest points, which will represent the top of our trees. Let's look at what are the parameters involved:
 
@@ -113,4 +113,4 @@ crowns <-lastrees_silva(las, chm, ttops, max_cr_factor = 0.6, exclusion = 0.3, e
 ```{r}
 plot(crowns)
 ```
-![crowns](figures/crowns.png)
+![crowns](../figures/crowns.png)
