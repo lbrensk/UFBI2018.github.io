@@ -4,15 +4,35 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+**Laura Brenskelle** , Ph.D. Student and Research Assistant
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+Department of Biology and Florida Museum of Natural History
 
+![Laura](figures/Laura.jpg)
 
-[jekyll-organization]: https://github.com/jekyll
+“She is interested in integrating zooarchaeological data and paleoclimate reconstructions from the Maya Lowland areas of Belize, Guatemala, Honduras, and Mexico. Using data and spatiotemporal modeling tools, she investigates how the local and regional biota were affected by direct human exploitation, habitat modification, short-term climate changes such as droughts, and shifts of cultural complexity through time. Her research aims to improve our understanding of the complex interplay between humans, climate, and biodiversity.”
+
+**Farah Carrasco Rueda**, Ph.D. Candidate in Interdisciplinary Ecology
+
+School of Natural Resources and Environment
+
+![Farah](figures/Farah.jpg)
+
+Her research focuses on investigating large-scale factors involved in the mechanism behind  observed patterns of bat diversity. Her study area is Madre de Dios, Peru. She is also interested in developing new automated ways to analyze acoustic data, and preparing educational material  to rural communities.
+
+**Jonathan Spoelhof**, Ph.D. Candidate and Research Assistant
+
+Department of Biology and Florida Museum of Natural History
+
+![Jonathan](figures/Spoelhof.jpg)
+
+His research involves the use of big data to explore the relationship between polyploidy and niche adaptation in plants on a global scale. His project involves testing common assumptions about polyploidy in plants while generating new hypotheses and resources for future research.”
+
+**Sergio Marconi**, Ph.D. Student in Interdisciplinary Ecology
+
+School of Natural Resources and Environment
+
+![Sergio](figures/Sergio.jpg)
+
+His research focuses on predicting changes in forest structure and functionality in a rapidly changing world. He is interested in investigating the ecological processes which determine patterns of plant functional traits within and across  forests in  U.S. He will use a combination of machine learning and process based models, applied to big data in Ecology.
