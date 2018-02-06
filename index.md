@@ -4,7 +4,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 ---
-### Welcome to the UFBI workshop webpage!
+### Welcome!
 
 We, the 2018 UFBI fellows are happy to offer an indoor workshop on methods used to address Biodiversity related question in Ecology. The Workshop will be held in the "blabla"  room in the University of Florida Informatics and Biodiversity institute on the 8th and 9th of May.
 
