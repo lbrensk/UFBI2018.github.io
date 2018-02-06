@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "Tree based species identification and biodiversity estimation using NEON AOP data"
+title:  "Day 1: landscape spatial scale"
 date:   2018-02-06 14:02:15 -0500
 categories: jekyll update
 ---
 
+## Tree based species identification and biodiversity estimation using NEON AOP data
 
 In this module we will see how to use LiDAR and hiperspectral data to identify tree species out of a scenery
 
@@ -18,7 +19,7 @@ In this module we will see how to use LiDAR and hiperspectral data to identify t
 - Use SVM to perform classification
 - Calculate biodiversity
 
-## Visualize LiDAR data
+### Visualize LiDAR data
 
 First of all, we will need a LiDAR file, download it from https://blablabla.io
 
