@@ -2,6 +2,8 @@
 layout: default
 title:  "Day 1: landscape spatial scale"
 permalink: /D1_MarconiS/
+exclude: true
+
 ---
 
 
