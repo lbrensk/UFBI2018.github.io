@@ -1,6 +1,6 @@
 ---
 layout: page
-title:  "Day 1: landscape spatial scale"
+title:  Landscape scale spatial 
 permalink: /D1_MarconiS/
 ---
 
