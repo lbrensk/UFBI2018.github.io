@@ -1,6 +1,6 @@
 ---
 layout: page
-title:  Landscape scale spatial 
+title:  DayOne
 permalink: /D1_MarconiS/
 ---
 
