@@ -19,4 +19,4 @@ The workshop will be structured as following:
 2. Genetic diversity and phylogenetic trees: challenges and uses in exploring environment- phylogenetic relationship
 
 ** Find out more: **
-* [Enter your email](register) to hear more
+* [Sign in](register) to hear more
