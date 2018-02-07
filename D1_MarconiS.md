@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Day 1: landscape spatial scale"
-permalink: /Lessons/D1_MarconiS/
+permalink: /D1_MarconiS/
 exclude: true
 
 ---
