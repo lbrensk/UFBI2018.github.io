@@ -26,7 +26,7 @@ github_username:  UFBI2018
 
 # Build settings
 markdown: kramdown
-theme: cayman
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
