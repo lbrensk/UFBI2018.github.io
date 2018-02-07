@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title:  "Day 1: landscape spatial scale"
 permalink: /D1_MarconiS/
 ---
