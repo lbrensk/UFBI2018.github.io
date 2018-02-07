@@ -6,4 +6,4 @@ permalink: /Lessons/
 
 **Tree based species identification and biodiversity estimation using NEON AOP data**
 
-[Day 1: landscape spatial scale](Spatial_with_neon)
+[Frequently asked questions](D1_MarconiS)
