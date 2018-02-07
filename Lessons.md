@@ -6,4 +6,4 @@ permalink: /Lessons/
 
 **Tree based species identification and biodiversity estimation using NEON AOP data**
 
-[Frequently asked questions](D1_MarconiS)
+[Spatial with NEON AOP](D1_MarconiS)
