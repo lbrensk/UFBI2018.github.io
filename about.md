@@ -25,7 +25,7 @@ Her research focuses on investigating large-scale factors involved in the mechan
 
 Department of Biology and Florida Museum of Natural History
 
-![Jonathan](figures/Spoelhof.jpg)
+![Jonathan](figures/Spoelhof.jpg)<!-- .element height="50%" width="50%" -->
 
 His research involves the use of big data to explore the relationship between polyploidy and niche adaptation in plants on a global scale. His project involves testing common assumptions about polyploidy in plants while generating new hypotheses and resources for future research.”
 
@@ -33,6 +33,6 @@ His research involves the use of big data to explore the relationship between po
 
 School of Natural Resources and Environment
 
-![Sergio](figures/Sergio.jpg)
+![Sergio](figures/Sergio.jpg)<!-- .element height="50%" width="50%" -->
 
 His research focuses on predicting changes in forest structure and functionality in a rapidly changing world. He is interested in investigating the ecological processes which determine patterns of plant functional traits within and across  forests in  U.S. He will use a combination of machine learning and process based models, applied to big data in Ecology.
