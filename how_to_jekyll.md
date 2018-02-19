@@ -1,3 +1,9 @@
+---
+layout: page
+title:  Jekyl howto
+permalink: /start_with_jekyll/
+---
+
 ### Create a website with Github pages 
 
 Jekyll is a static site generator, which can allow you to build your personal website/blog in a easy and decently polished way.
