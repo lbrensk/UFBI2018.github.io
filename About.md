@@ -33,6 +33,8 @@ permalink: /About/
 
 <img align="left" src="figures/Farah.jpg" alt="Drawing" width="200px;"/> Her research focuses on investigating large-scale factors involved in the mechanism behind  observed patterns of bat diversity. Her study area is Madre de Dios, Peru. She is also interested in developing new automated ways to analyze acoustic data, and preparing educational material  to rural communities.
 
+<br><br>
+
 ### Section 4: Crown segmentation  and species identification with LiDAR and Hiperspectral data
 
 **Sergio Marconi**, Ph.D. Student in Interdisciplinary Ecology
