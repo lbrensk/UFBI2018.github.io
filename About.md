@@ -6,7 +6,7 @@ permalink: /About/
 
 ### Section 1: Acquiring and cleaning occurrence data from online databases
 
-<img align="left" src="figures/Spoelhof.jpg" alt="Drawing" width="200px;"/>
+<img align="left" src="./figures/Spoelhof.jpg" alt="Drawing" width="200px;"/>
 
 **Jonathan Spoelhof**, Ph.D. Candidate and Research Assistant
 
@@ -21,7 +21,7 @@ His research involves the use of big data to explore the relationship between po
 
 ### Section 2: Climate data resources and how to extract usable estimates from past climate
 
-<img align="left" src="figures/Laura.jpg" alt="Drawing" width="200px;"/> **Laura Brenskelle** , Ph.D. Student and Research Assistant
+<img align="left" src="./figures/Laura.jpg" alt="Drawing" width="200px;"/> **Laura Brenskelle** , Ph.D. Student and Research Assistant
 
 *Department of Biology and Florida Museum of Natural History*
 
