@@ -1,11 +1,11 @@
 ---
 layout: page
-title:  Crown segmentation and species identification with LiDAR and Hiperspectral data
+title:  Ecology with NEON AOP
 permalink: /MarconiS/
 ---
 
 
-## Tree based species identification and biodiversity estimation using NEON AOP data
+## Crown segmentation and identification with LiDAR and Hiperspectral data
 
 In this module we will see how to use LiDAR and hiperspectral data to identify tree species out of a scenery
 
