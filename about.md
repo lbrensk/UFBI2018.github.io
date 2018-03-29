@@ -4,15 +4,19 @@ title: About
 permalink: /about/
 ---
 
-<img align="left" src="figures/Spoelhof.jpg" alt="Drawing" width="200px;"/> **Jonathan Spoelhof**, Ph.D. Candidate and Research Assistant
+### Section 1: Acquiring occurrence data from online databases
+
+<img align="left" src="figures/Spoelhof.jpg" alt="Drawing" width="200px;"/>  
+
+**Jonathan Spoelhof**, Ph.D. Candidate and Research Assistant
 
 Department of Biology and Florida Museum of Natural History
 
 His research involves the use of big data to explore the relationship between polyploidy and niche adaptation in plants on a global scale. His project involves testing common assumptions about polyploidy in plants while generating new hypotheses and resources for future research.”
 
 <br><br>
-<br><br>
-<br><br>
+
+### Section 2: Climate data resources
 
 <img align="left" src="figures/Laura.jpg" alt="Drawing" width="200px;"/> **Laura Brenskelle** , Ph.D. Student and Research Assistant
 
@@ -22,6 +26,8 @@ Department of Biology and Florida Museum of Natural History
 
 <br><br>
 
+### Section 3: Raster images and estimation of forest cover in R
+
 <img align="left" src="figures/Farah.jpg" alt="Drawing" width="200px;"/> **Farah Carrasco Rueda**, Ph.D. Candidate in Interdisciplinary Ecology
 
 School of Natural Resources and Environment
@@ -29,6 +35,9 @@ School of Natural Resources and Environment
 Her research focuses on investigating large-scale factors involved in the mechanism behind  observed patterns of bat diversity. Her study area is Madre de Dios, Peru. She is also interested in developing new automated ways to analyze acoustic data, and preparing educational material  to rural communities.
 
 <br><br>
+
+### Section 4: Crown segmentation and species identification with NEON Airborne data
+
 
 <img align="left" src="figures/Sergio.jpg" alt="Drawing" width="200px;"/> **Sergio Marconi**, Ph.D. Student in Interdisciplinary Ecology
 
