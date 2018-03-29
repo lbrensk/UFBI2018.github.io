@@ -26,7 +26,7 @@ description: University of Florida Biodiversity Institute (UFBI) is happy to off
 
 # List of links in the navigation bar
 navbar-links:
-  About Me: "About"
+  About Us: "About.md"
   Resources:
     - University of Florida Biodiversity Institute: "https://biodiversity.institute.ufl.edu"
     - Workshop outline: "outline"

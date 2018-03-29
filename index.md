@@ -14,6 +14,7 @@ We, the 2017-18 UFBI fellows, are happy to offer an indoor workshop on methods u
 
 1.     Acquiring and cleaning occurrence data from online databases
 2.     Climate data resources and how to extract usable estimates from past climate
+
 ## Day 2: Spatial Ecology from Airborne and Satellite Data
 
 1.     Raster images and estimation of forest cover in R
