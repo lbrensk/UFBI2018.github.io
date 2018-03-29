@@ -45,4 +45,7 @@ May 9th
 2:45 pm - 3:00 pm	BREAK
 3:00 pm - 4:45 pm	Species classification using NEON hyperspectral data PART 2 - Sergio Marconi
 4:45 pm - 5:00 pm 	FINAL REMARKS
+<<<<<<< HEAD
+>>>>>>> parent of 6a630c3... up
+=======
 >>>>>>> parent of 6a630c3... up
