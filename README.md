@@ -1,1 +1,1 @@
-http:UFBI2018.github.io
+http://UFBI2018.github.io
