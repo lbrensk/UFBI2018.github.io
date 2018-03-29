@@ -1,9 +1,7 @@
 ---
-layout: page
-title: "About"
+title: "About Us"
 icon: fa-book
-order: 2
-permalink: /about/
+order: 3
 ---
 
 ### Section 1: Acquiring and cleaning occurrence data from online databases

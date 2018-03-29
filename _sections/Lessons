@@ -2,8 +2,7 @@
 layout: page
 title: "Lessons"
 icon: fa-book
-order: 2
-permalink: /Lessons/
+order: 3
 ---
 
 **Tree based species identification and biodiversity estimation using NEON AOP data**
