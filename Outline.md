@@ -1,7 +1,7 @@
 ---
 title: "Workshop Outline"
 layout: page
-permalink: /About/
+permalink: /Outline/
 ---
 
 ## UFBI 2018 Spatial Ecology Workshop
