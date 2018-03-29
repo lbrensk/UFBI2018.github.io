@@ -10,7 +10,7 @@ permalink: /About/
 
 *Department of Biology and Florida Museum of Natural History*
 
-<img align="left" src="./figures/Spoelhof.jpg" alt="Drawing" width="200px;"/> His research involves the use of big data to explore the relationship between polyploidy and niche adaptation in plants on a global scale. His project involves testing common assumptions about polyploidy in plants while generating new hypotheses and resources for future research.”
+<img align="left" src="../figures/Spoelhof.jpg" alt="Drawing" width="200px;"/> His research involves the use of big data to explore the relationship between polyploidy and niche adaptation in plants on a global scale. His project involves testing common assumptions about polyploidy in plants while generating new hypotheses and resources for future research.”
 
 <br><br>
 <br><br>
@@ -21,7 +21,7 @@ permalink: /About/
 
 *Department of Biology and Florida Museum of Natural History*
 
-<img align="left" src="./figures/Laura.jpg" alt="Drawing" width="200px;"/> “She is interested in integrating zooarchaeological data and paleoclimate reconstructions from the Maya Lowland areas of Belize, Guatemala, Honduras, and Mexico. Using data and spatiotemporal modeling tools, she investigates how the local and regional biota were affected by direct human exploitation, habitat modification, short-term climate changes such as droughts, and shifts of cultural complexity through time. Her research aims to improve our understanding of the complex interplay between humans, climate, and biodiversity.”
+<img align="left" src="/figures/Laura.jpg" alt="Drawing" width="200px;"/> “She is interested in integrating zooarchaeological data and paleoclimate reconstructions from the Maya Lowland areas of Belize, Guatemala, Honduras, and Mexico. Using data and spatiotemporal modeling tools, she investigates how the local and regional biota were affected by direct human exploitation, habitat modification, short-term climate changes such as droughts, and shifts of cultural complexity through time. Her research aims to improve our understanding of the complex interplay between humans, climate, and biodiversity.”
 
 <br><br>
 
