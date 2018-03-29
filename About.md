@@ -1,7 +1,7 @@
 ---
 title: "About Us"
 layout: page
-permalink: /about/
+permalink: /About/
 ---
 
 ### Section 1: Acquiring and cleaning occurrence data from online databases
