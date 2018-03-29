@@ -1,12 +1,12 @@
 ---
-layout: page
+layout: default
 title: About
 permalink: /about/
 ---
 
 ### Section 1: Acquiring and cleaning occurrence data from online databases
 
-<img align="left" src="figures/Spoelhof.jpg" alt="Drawing" width="200px;"/>  
+<img align="left" src="figures/Spoelhof.jpg" alt="Drawing" width="200px;"/>
 
 **Jonathan Spoelhof**, Ph.D. Candidate and Research Assistant
 
@@ -44,4 +44,3 @@ Her research focuses on investigating large-scale factors involved in the mechan
 *School of Natural Resources and Environment*
 
 His research focuses on predicting changes in forest structure and functionality in a rapidly changing world. He is interested in investigating the ecological processes which determine patterns of plant functional traits within and across  forests in  U.S. He will use a combination of machine learning and process based models, applied to big data in Ecology.
-

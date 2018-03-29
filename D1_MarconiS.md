@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title:  DayOne
 permalink: /D1_MarconiS/
 ---
