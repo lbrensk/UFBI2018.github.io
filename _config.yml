@@ -32,9 +32,9 @@ navbar-links:
     - Lesson 1: "Jon"
     - Lesson 2: "Laura"
     - Lesson 3: "Farrah"
-    - Lesson 4: "Sergio"
+    - Lesson 4: "MarconiS"
   Lessons: "Lessons"
-  Etherpad: ""
+  Etherpad: "https://etherpad.net/p/UFBI_spatial_2018"
   Sponsors:
     - University of Florida Biodiversity Institute: "https://biodiversity.institute.ufl.edu"
 
