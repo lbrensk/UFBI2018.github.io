@@ -1,6 +1,8 @@
 ---
-layout: single
-title: About
+layout: page
+title: "About"
+icon: fa-book
+order: 2
 permalink: /about/
 ---
 

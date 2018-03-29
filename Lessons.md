@@ -1,6 +1,8 @@
 ---
 layout: page
-title:  "Lessons"
+title: "Lessons"
+icon: fa-book
+order: 2
 permalink: /Lessons/
 ---
 

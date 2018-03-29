@@ -19,14 +19,14 @@ description: >- # this means to ignore newlines until "baseurl:"
   University of Florida Biodiversity Institute (UFBI) is happy to offer you an
   intermediate/advanced 2 days workshop in
   Ecology on the 8th and 9th of May
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/jekyll-theme-prologue"
 url: "https://UFBI2018.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: UFBI
 github_username:  UFBI2018
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-slate
+theme: jekyll-theme-prologue
 plugins:
   - jekyll-feed
 
