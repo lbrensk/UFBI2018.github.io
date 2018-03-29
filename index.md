@@ -7,7 +7,7 @@ title: UF
 ---
 
 **Welcome!**
-We, the 2017-18 UFBI fellows, are happy to offer an indoor workshop on methods used to address biodiversity-related questions in Ecology. The workshop will be held in the “blabla” room in the University of Florida Biodiversity and Informatics institutes on the 8th and 9th of May. It will be a fun opportunity to gain experience with basic and advanced methods in spatial ecology using different freely available tools and resources, such as R, python, occurrence record databases, and WorldClim. The two-day workshop will be divided into four sessions of introductory, hands-on presentations.
+We, the 2017-18 UFBI fellows, are happy to offer an indoor workshop on methods used to address biodiversity-related questions in Ecology. The workshop will be held in the E251 CSE room in the University of Florida Biodiversity and Informatics institutes on the 8th and 9th of May. It will be a fun opportunity to gain experience with basic and advanced methods in spatial ecology using different freely available tools and resources, such as R, python, occurrence record databases, and WorldClim. The two-day workshop will be divided into four sessions of introductory, hands-on presentations.
 
 
 ## Day 1: Occurrence and Climate Data from Big Databases
