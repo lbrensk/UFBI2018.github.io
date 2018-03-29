@@ -37,7 +37,7 @@ His research involves the use of big data to explore the relationship between po
 
 Her research focuses on investigating large-scale factors involved in the mechanism behind  observed patterns of bat diversity. Her study area is Madre de Dios, Peru. She is also interested in developing new automated ways to analyze acoustic data, and preparing educational material  to rural communities.
 
-### Section 4: Crown segmentation with LiDAR point-cloud and species identification with Hiperspectral data
+### Section 4: Crown segmentation  and species identification with LiDAR and Hiperspectral data
 
 <img align="left" src="figures/Sergio.jpg" alt="Drawing" width="200px;"/> **Sergio Marconi**, Ph.D. Student in Interdisciplinary Ecology
 
