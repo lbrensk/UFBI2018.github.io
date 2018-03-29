@@ -1,5 +1,5 @@
 ---
-layout: pages
+layout: default
 title:  "Lessons"
 permalink: /Lessons/
 ---

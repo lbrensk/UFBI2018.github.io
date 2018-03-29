@@ -39,6 +39,16 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 author: UFBI 2018 Fellows
 
+# List of links in the navigation bar
+navbar-links:
+  About Me: "aboutme"
+  Resources:
+    - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
+    - Learn markdown: "http://www.markdowntutorial.com/"
+    - GitHub Pages: "https://pages.github.com/"
+  Author's home: "http://deanattali.com"
+
+
 # You'll want to customize url and baseurl for your own site:
 baseurl: # the subpath of your site, e.g. /blog
 url: "https://UFBI2018.github.io" # the base hostname & protocol for your site

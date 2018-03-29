@@ -1,6 +1,6 @@
 ---
-layout: default
-title:  DayOne
+layout: posts
+title:  Airborne
 permalink: /D1_MarconiS/
 ---
 
