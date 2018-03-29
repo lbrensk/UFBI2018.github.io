@@ -1,13 +1,7 @@
 ---
-layout: page
-<<<<<<< HEAD:_sections/Lessons
-title: "Lessons"
-icon: fa-book
-order: 3
-=======
+layout: pages
 title:  "Lessons"
 permalink: /Lessons/
->>>>>>> parent of 09e83f0... new theme:Lessons.md
 ---
 
 **Tree based species identification and biodiversity estimation using NEON AOP data**

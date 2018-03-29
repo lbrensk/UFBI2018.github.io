@@ -1,21 +1,7 @@
 ---
-<<<<<<< HEAD:_sections/AboutUs
-<<<<<<< HEAD:_sections/AboutUs
-<<<<<<< HEAD:_sections/AboutUs
 title: "About Us"
-icon: fa-book
-order: 3
-=======
 layout: default
-=======
-layout: single
->>>>>>> parent of 09e83f0... new theme:about.md
-=======
-layout: default
->>>>>>> parent of 6a630c3... up:about.md
-title: About
 permalink: /about/
->>>>>>> parent of 6a630c3... up:about.md
 ---
 
 ### Section 1: Acquiring and cleaning occurrence data from online databases
