@@ -13,11 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "2018 UFBI Workshop: Spatial, Temporal, and Philogenetic diversity"
-email: ufbi@mail.org
+title: "2018 UFBI Workshop: Spatial Ecology Workshop"
+# email: ufbi@mail.org
 description: >- # this means to ignore newlines until "baseurl:"
   University of Florida Biodiversity Institute (UFBI) is happy to offer you an
-  intermediate/advanced 2 days workshop in Spatial, Temporal and Philogenetic
+  intermediate/advanced 2 days workshop in
   Ecology on the 8th and 9th of May
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://UFBI2018.github.io" # the base hostname & protocol for your site, e.g. http://example.com
