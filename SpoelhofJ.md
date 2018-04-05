@@ -53,9 +53,9 @@ firstup <- function(x) {
 }
 ```
 
-##Species of interest
+## Species of interest
 
-###Example: *Epidendrum*
+### Example: *Epidendrum*
 
 I like orchids, particularly *Epidendrum* species. After looking around the internet for a few interesting species, I found these species names: *Epidendrum arachnoides*, *Epidendrum nocturnum*, and *Epidendrum ciliaris*
 
@@ -107,7 +107,7 @@ species
 
 One of our species names was correct, one had a typo, and the other had a synonymous accepted name.
 
-##Occurrence database queries
+## Occurrence database queries
 
 Most occurrence databases (GBIF, iDigBio, Bison, eBird, iNaturalist, etc) have functional R based APIs. The ``spocc`` package allows you to query multiple APIs at once through the ``occ`` function. We'll use it here.
 
@@ -205,11 +205,11 @@ table(occ_total$name)
 
 We finally have a perfectly usable raw data set. Now, the hard part...
 
-##Data cleaning
+## Data cleaning
 
 Occurrence data are notoriously messy, and there are a lot of steps to take before we can consider a data set to be 'clean'. The following steps are geared towards producing a reliable set of natural occurrences of the species of interest (e.g. for niche modeling). Different research goals may have different standards or criteria for clean data.
 
-###Missing data
+### Missing data
 
 Our raw data set has many fields, of which quite a few are likely to have missing data. the fields which are absolutely essential are species name, date, longitude, and latitude. All records will possess a species name, but not all records will possess dates or valid lon/lat coordinates.
 
@@ -232,7 +232,7 @@ occ_total = occ_total[(occ_total$longitude != 0) & (occ_total$latitude != 0),]
 
 ```
 
-###Duplicated records
+### Duplicated records
 
 R provides many ways to identify and remove duplicated data. Keep in mind that, for spatial data, part of this process will involve matching lon/lat coordinates as floating-point numbers. Using a function like ``duplicated`` is very simple, but, had we not rounded the lon/lat coordinates earlier, it would not remove many duplicate records because of residual floating-point differences between numbers from different sources. While a function like ``all.equal`` could be applied instead, the method presented here is much simpler and faster for large data sets.
 
@@ -244,7 +244,7 @@ occ_total = occ_total[!duplicates,]
 
 Note that this code will remove records taken from exactly the same location, but on different dates. This would be appropriate for a niche modeling approach (subsequent sampling would be redundant from a modeling perspective), but not necessarily appropriate for other uses.
 
-###Questionable records
+### Questionable records
 
 Our data set is mostly clean, but there will inevitably be a few records that are incorrect or dubious. The following steps may seem like a lot of work to remove a few points here and there, but they are necessary to remove outliers that could seriously effect subsequent analyses.
 
