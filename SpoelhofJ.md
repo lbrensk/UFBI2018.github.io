@@ -63,7 +63,7 @@ Let's imagine that we want to become international biocriminals and go smuggle s
 
 First, however, we have to make sure we have the right names, not old names or synonymous names. We can check our names against databases of accepted species names using a taxonomic name resolution service, or TNRS. We'll use is the ``tnrs`` function in the R package ``taxize``.
 
-```{r tnrs, eval = FALSE}
+```{r}
 species = c("Epidendrum arachnoides",
             "Epidendrum nocturnum",
             "Epidendrum ciliaris")
@@ -74,25 +74,25 @@ name_query = tnrs(species,
 name_query
 ```
 
-```{r species, include=FALSE}
+```{r}
 species = c("Epidendrum arachnoides",
             "Epidendrum nocturnum",
             "Epidendrum ciliaris")
 ```
 
-```{r name_query_results, echo = FALSE}
+```{r}
 (name_query = read.csv("name_query.csv", stringsAsFactors = F))
 ```
 
 ``tnrs`` gives you some pretty useful information. In addition to the names. The match score can be used to filter out cases where it can only match the genus name (score <= 50%). In our example the matches are of good quality (> 90%). The names we will use for database queries are the accepted names.
 
-```{r acceptednames}
+```{r}
 accepted_species = name_query$acceptedname
 ```
 
 Note that ``tnrs`` does not maintain the order of submitted names. In cases where you want to maintain that order in the list of accepted names (say, a list of tip labels for a phylogeny), you can use ``match`` to restore the original order.
 
-```{r reorder species}
+```{r}
 accepted_species = accepted_species[match(species,
                                            name_query$submittedname)]
 
@@ -101,7 +101,7 @@ accepted_species
 
 Now, let's compare these names to the input names.
 
-```{r orig_species}
+```{r}
 species
 ```
 
@@ -113,13 +113,13 @@ Most occurrence databases (GBIF, iDigBio, Bison, eBird, iNaturalist, etc) have f
 
 First, let's specify the sources we want to use. for our *Epidendrum* example, we'll use iDigBio and GBIF.
 
-```{r sources}
+```{r}
 sources = c("idigbio", "gbif")
 ```
 
 Next, we'll format our query. ``occ`` has several options to filter the data that is returned. We'll limit our records per species to 1,000 and set ``has_coords = T``, so that we only retrieve records with lon/lat coordinates. We can also use ``gbifopts`` and ``idigbioopts`` to set options that are passed to the individual APIs (see their documentation for more options), in this case, a specification that only records attached to a preserved specimen are returned. This will eliminate many unwanted records, including observations, which are typically less reliably identified, and living specimens, which often come from unnatural habitats like zoos or botanical gardens.
 
-```{r query, eval = FALSE}
+```{r}
 occurrences = occ(accepted_species,
                   from = sources,
                   limit = 1000,
@@ -130,7 +130,7 @@ occurrences = occ(accepted_species,
 
 This query returns a large 'occdat' object with individual results from each database. ``spocc`` provides the ``occ2df`` function as a utility to merge query results from different databases into a single data frame.
 
-```{r occ2df, eval = FALSE}
+```{r}
 occdf = occ2df(occurrences)
 ```
 
@@ -138,7 +138,7 @@ While this function is very handy, it eliminates much of the raw information tha
 
 First, we'll need to generate each potential combination of species and source with ``expand.grid``. Note the use of ``gsub`` to replace the space between the genus and specific epithet with an underscore.
 
-```{r source_species}
+```{r}
 (source_species_comb = expand.grid(sources,
                                    gsub(" ",
                                         "_",
@@ -147,7 +147,7 @@ First, we'll need to generate each potential combination of species and source w
 
 Next, we'll use these combinations to assemble strings that will extract individual data frames from the ``occdat`` object.
 
-```{r string_assemble}
+```{r}
 (source_species_string = paste("occurrences",
                                source_species_comb$Var1,
                                "data",
@@ -157,7 +157,7 @@ Next, we'll use these combinations to assemble strings that will extract individ
 
 Finally, we can evaluate these strings within the ``bind_rows`` function to pull all of the data into one raw data set.
 
-```{r hairball, eval = FALSE}
+```{r}
 raw = eval(parse(text = (paste("bind_rows(",
                                paste(source_species_string,
                                      collapse = ","),
@@ -166,7 +166,7 @@ raw = eval(parse(text = (paste("bind_rows(",
 
 There are a lot of columns in this data set, and most of them are useless. We can create a new data frame from the raw data set by specifying the columns we want to keep (in this case: name, longitude, latitude, date, establishment means, country, locality, data provider, and unique key. Unfortunately GBIF and iDigBio occasionally use different column names for the same data types. In these cases, alternate columns will either contain data or NA based on the source, so we can simply use ``pmin`` to merge them within the ``data.frame`` function. We'll also round the lon/lat coordinates to resolve any floating-point number differences between identical records from different sources. This will make removing duplicate records easier.
 
-```{r raw_to_useful, eval = FALSE}
+```{r}
 occ_total = data.frame(name = raw$name,
                        longitude = round(raw$longitude,
                                          digits = 5),
@@ -185,19 +185,19 @@ occ_total = data.frame(name = raw$name,
                        stringsAsFactors = F)
 ```
 
-```{r load_occs, include=FALSE}
+```{r}
 occ_total = read.csv("occurrences.csv", stringsAsFactors = F)
 ```
 
 Now, let's find out how many records we obtained for each species
 
-```{r record count}
+```{r}
 table(occ_total$name)
 ```
 
 Oops, GBIF and iDigBio return species names in a different format. We can use ``firstup`` to homogenize the formats
 
-```{r homo_name_formats}
+```{r}
 occ_total$name = firstup(occ_total$name)
 
 table(occ_total$name)
@@ -215,19 +215,19 @@ Our raw data set has many fields, of which quite a few are likely to have missin
 
 Removing missing dates is easy with ``is.na``:
 
-```{r missing_dates}
+```{r}
 occ_total = occ_total[!is.na(occ_total$date),]
 ```
 
 You may also want to restrict occurrence dates to a certain range. For example, the following code would remove any occurrences dated before Jan. 1, 2000.
 
-```{r restrict_dates, eval = FALSE}
+```{r}
 occ_total = occ_total[occ_total$date > "2000-01-01",]
 ```
 
 Although we specified ``has_coords = T`` in our ``occ`` query, some missing coordinate values will have been entered database as 0 lon / 0 lat. Given that this point is in the Atlantic Ocean south of Ghana, it's unlikely that any of our species of interest (all epiphytic plants) will naturally occur there. We can remove these records with simple subsetting.
 
-```{r remove_0/0}
+```{r}
 occ_total = occ_total[(occ_total$longitude != 0) & (occ_total$latitude != 0),]
 
 ```
@@ -236,7 +236,7 @@ occ_total = occ_total[(occ_total$longitude != 0) & (occ_total$latitude != 0),]
 
 R provides many ways to identify and remove duplicated data. Keep in mind that, for spatial data, part of this process will involve matching lon/lat coordinates as floating-point numbers. Using a function like ``duplicated`` is very simple, but, had we not rounded the lon/lat coordinates earlier, it would not remove many duplicate records because of residual floating-point differences between numbers from different sources. While a function like ``all.equal`` could be applied instead, the method presented here is much simpler and faster for large data sets.
 
-```{r remove_dups}
+```{r}
 duplicates = duplicated(occ_total[,c("name", "longitude", "latitude")])
 
 occ_total = occ_total[!duplicates,]
@@ -250,7 +250,7 @@ Our data set is mostly clean, but there will inevitably be a few records that ar
 
 First, we want to remove any records whose lon/lat coordinates don't match their stated country of origin. ``map.where`` from the ``maps`` package will return a vector of countries based on a set of input coordinates.
 
-```{r map.where}
+```{r}
 countries = map.where(database = "world", occ_total$longitude, occ_total$latitude)
 
 countries = gsub("\\:.*","",countries)
@@ -260,20 +260,20 @@ The ``gsub`` function can be used with a regular expression to remove the additi
 
 Now, we'll want to check the output from ``map.where`` against the vector of countries associated with our occurrence records, but there's a problem: the country names from iDigBio and GBIF are an inconsistent mess.
 
-```{r unique_countries}
+```{r}
 unique(countries)
 unique(occ_total$country)
 ```
 
 So, we can identify the specific country names that don't match the names from ``map.where``...
 
-```{r mismatched_country_names}
+```{r}
 (bad_country_names = unique(occ_total$country)[!(unique(occ_total$country) %in% unique(countries))])
 ```
 
 ...and create an index to correct those names (note that Jamaica does not appear in the ``map.where`` output; this was a mismatch)...
 
-```{r country_index}
+```{r}
 country_correction = data.frame(old = bad_country_names,
                                 new = c("Brazil", "Brazil", "Bolivia",
                                         "Mexico", "USA", "Venezuela",
@@ -283,7 +283,7 @@ country_correction = data.frame(old = bad_country_names,
 
 and change those names with a vectorized ``for`` loop.
 
-```{r replace_country_names}
+```{r}
 for(i in 1:nrow(occ_total)){
   if(occ_total$country[i] %in% country_correction$old){
     occ_total$country[i] = country_correction$new[which(country_correction$old == occ_total$country[i])]
@@ -293,13 +293,13 @@ for(i in 1:nrow(occ_total)){
 
 Finally, we can filter out any records with mismatched countries and lon/lat coordinates.
 
-```{r remove_country_mismatch}
+```{r}
 occ_total = occ_total[which(countries == occ_total$country),]
 ```
 
 Next, we'll want to filter out any records with mis-specified records that don't fall on land. To do this, we need global maps of land and major lakes. We can download and import these maps into R with the following code.
 
-```{r land_lakes, eval = F}
+```{r}
 land_url = "www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip"
 lakes_url = "www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_lakes.zip"
 
@@ -318,7 +318,7 @@ land = readOGR("ne_10m_land")
 lakes = readOGR("ne_10m_lakes")
 ```
 
-```{r load_maps_run, include = FALSE}
+```{r}
 land = readOGR("ne_10m_land")
 lakes = readOGR("ne_10m_lakes")
 ```
@@ -327,7 +327,7 @@ We can check the lon/lat coordinates of our occurrences against these maps to ma
 
 First, we need to make convert our coordinates into a ``SpatialPoints`` object with the same projection as our maps...
 
-```{r spatialpoints}
+```{r}
 global_occs <- data.frame(x = occ_total$longitude, y = occ_total$latitude)
 coordinates(global_occs) <- ~ x + y
 proj4string(global_occs)=CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
@@ -335,7 +335,7 @@ proj4string(global_occs)=CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +
 
 ...then use ``over`` to check each point against the maps. In this case, we want to keep any points that are over land and not over lakes. We can filter out points that don't meet these criteria easily because over returns ``NA`` for any point not over the specified feature of the map.
 
-```{r over}
+```{r}
 over_land = over(global_occs, land)
 over_lakes = over(global_occs, lakes)
 
@@ -346,7 +346,7 @@ This method of spatial filtering is incredibly useful. In addition to checking p
 
 We've done just about everything we can without looking at the points visually to identify outliers. Hopefully, there aren't any, but lets plot our points on the map to make sure.
 
-```{r plot_points}
+```{r}
 par(mar = c(0,0,0,0))
 plot(land)
 
@@ -364,7 +364,7 @@ points(occ_total$longitude,
 
 Well, there are some weird points, mostly in the USA. Note the points in Hawaii, New England, and central USA. Those points are definitely outside of the normal range of these orchids, but they weren't caught by any of our filtering steps this far. Let's look at the locality data to find out what's going on. We can isolate the records of interest via sorting by latitude and filtering by country.
 
-```{r latsort}
+```{r}
 latsort = occ_total[order(occ_total$latitude,
                           decreasing = T),]
 
@@ -375,7 +375,7 @@ Aha! The problematic records (1-3 above) are from Universities and botanical gar
 
 Based on the locality info within the points above, we may be able to search for similar records that don't look like outliers on the map by searching for words like "garden", "greenhouse", or "university" using ``grepl``. Keep in mind that we should search for these terms in other languages, too (in this case, Spanish and Portuguese).
 
-```{r bad_words}
+```{r}
 bad_words = c("greenhouse", "invernadero", "estufa",
               "garden", "jardin", "jardim", "university",
               "universidad", "universidade")
@@ -389,13 +389,13 @@ occ_total[grepl(paste(bad_words,
 
 OK, only two more from Mexico, and both of those are from a natural reserve, so they're probably fine. Let's add the points in Hawaii, Colorado, Missouri, and Connecticut to a list of records to remove using the key as a unique identifier.
 
-```{r remove_northerners}
+```{r}
 bad_locals = latsort[latsort$country == "USA","key"][c(1:3, 6)]
 ```
 
 Now, just in case, let's check to make sure none of these orchids were sampled from a movie theater.
 
-```{r bad_words_2}
+```{r}
 bad_words = c("movie theater", "cine", "cinema")
 
 bad_words = c(bad_words, firstup(bad_words))
@@ -408,7 +408,7 @@ occ_total[grepl(paste(bad_words,
 
 Great. Add it to the list and remove!
 
-```{r another_one}
+```{r}
 bad_locals = c(bad_locals, occ_total$key[grepl("cinema",occ_total$locality)])
 
 occ_total = occ_total[-which(occ_total$key %in% bad_locals),]
