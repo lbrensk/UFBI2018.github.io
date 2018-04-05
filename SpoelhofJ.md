@@ -14,7 +14,7 @@ permalink: /SpoelhofJ/
 
 All of the following packages are necessary for this module. If you haven't  already, install them with ``install.packages``. In a Linux environment, it may be necessary to install the ``libgdal-dev`` library in the terminal before installing ``rgdal`` in R.
 
-```{r libraries, eval=FALSE}
+```{r}
 #install.packages("dplyr")
 library(dplyr)
 #install.packages("raster")
@@ -29,7 +29,7 @@ library(spocc)
 library(taxize)
 ```
 
-```{r librun, include=FALSE}
+```{r}
 library(taxize)
 library(spocc)
 library(dplyr)
@@ -40,13 +40,13 @@ library(maps)
 
 Next, set a working directory.
 
-```{r setwd, eval = FALSE}
+```{r}
 setwd("your_directory_file_path")
 ```
 
 Create a function to capitalize the first letter of a character string. This will come in handy for formatting species names later.
 
-```{r firstup}
+```{r}
 firstup <- function(x) {
   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
   x
