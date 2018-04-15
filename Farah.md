@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  Forest Cover Estimation
-permalink: /FarahTest/
+permalink: /Farah/
 ---
 
 # Working with raster maps 
