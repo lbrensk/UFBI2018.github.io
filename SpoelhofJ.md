@@ -338,6 +338,7 @@ points(occ_total$longitude,
        cex = 0.5,
        col = c("dark red", "navy", "lime green")[factor(occ_total$name)])
 ```
+![global_map](figures/Jon_image.png)
 
 Well, there are some weird points, mostly in the USA. Note the points in Hawaii, New England, and central USA. Those points are definitely outside of the normal range of these orchids, but they weren't caught by any of our filtering steps this far. Let's look at the locality data to find out what's going on. We can isolate the records of interest via sorting by latitude and filtering by country.
 
