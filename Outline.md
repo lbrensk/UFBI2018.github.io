@@ -11,36 +11,82 @@ The two-day workshop will take place on **May 8th and 9th**, and will be divided
 
 #### May 8th: Occurrence and Climate data from big dataset
 
-`9:00 am - 10:30 am`	Acquiring occurrence data from online databases - *Jon Spoelhof*
+| Time  | Activity |
+| ------------- | ------------- |
+| 9:00 am - 10:30 am  | Acquiring occurrence data from online databases - *Jon Spoelhof*  |
+| 10:30 am - 10:45 pm  | BREAK  |
+| 10:45 pm -12:15 pm | Occurrence data continued - *Jon Spoelhof*  |
+| 12:15 pm - 1:15 pm  | LUNCH  |
+| 2:45 pm - 3:00 pm  | Climate data resources overview - *Laura Brenskelle*  |
+| 3:00 pm - 4:45 pm  | BREAK  |
+| 10:30 am - 10:45 pm  | Climate data hands-on examples - *Laura Brenskelle*  |
+| 4:45 pm - 5:00 pm  | Summary for the day  |
 
-`10:30 am - 10:45 pm`  	BREAK
-
-`10:45 pm -12:15 pm`	Occurrence data continued - *Jon Spoelhof*
-
-`12:15 pm - 1:15 pm` 	LUNCH
-
-`1:15 pm - 2:45 pm`	Climate data resources overview - *Laura Brenskelle*
-
-`2:45 pm - 3:00 pm`	BREAK
-
-`3:00 pm - 4:45 pm`	Climate data hands-on examples - *Laura Brenskelle*
-
-`4:45 pm - 5:00 pm` 	Summary for the day
-<br><br>
 #### May 9th: Spatial Ecology from Remote sensing
 
-`9:00 am - 10:30 am`        Raster images and estimation of forest cover in R - *Farah Carrasco-Rueda*
+| Time  | Activity |
+| ------------- | ------------- |
+| 9:00 am - 10:30 am  | Raster images and estimation of forest cover in R - *Farah Carrasco-Rueda*  |
+| 10:30 am - 10:45 pm  | BREAK  |
+| 10:45 pm -12:15 pm | Use LiDAR point-cloud data to delineate crowns - *Farah Carrasco-Rueda*  |
+| 12:15 pm - 1:15 pm  | LUNCH  |
+| 2:45 pm - 3:00 pm  | 	Species classification using NEON hyperspectral data. PART 1 - *Sergio Marconi* |
+| 3:00 pm - 4:45 pm  | BREAK  |
+| 10:30 am - 10:45 pm  | Species classification using NEON hyperspectral data PART 2 - *Sergio Marconi*  |
+| 4:45 pm - 5:00 pm  | FINAL REMARKS |
 
-`10:30 am - 10:45 pm`  	BREAK
 
-`10:45 pm -12:15 pm`	Use LiDAR point-cloud data to delineate crowns - *Farah Carrasco-Rueda*
+#### In Detail
 
-`12:15 pm - 1:15 pm` 	LUNCH
+**Jon Spoelhof**
+1.	Obtaining occurrence data in R
+2.	Taxonomic name resolution using the taxise package
+3.	Occurrence data queries using the spocc package
+a.	Sources of data: record types, limitations, and overlap
+b.	Source-specific query options
+c.	Strategies for integrating raw data from multiple sources
+4.	Data cleaning (dplvr, raster, rgdal, and maps packages)
+a.	Removing dubious records and missing data
+b.	Removing duplicate records
+c.	Spatial filtering based on geographic boundaries
+d.	Strategies to exclude unnatural occurrences
 
-`1:15 pm - 2:45 pm`	Species classification using NEON hyperspectral data. PART 1 - *Sergio Marconi*
+**Laura Brenskelle**
+1.	Review different climate data resources
+a.	ClimNA - https://sites.ualberta.ca/~ahamann/data/climatena.html
+b.	Future data projections - https://cds.nccs.nasa.gov/nex-gddp/
+c.	WorldClim - http://worldclim.org
+o	NOAA - https://www.giss.nasa.gov/tools/panoply/
+d.	Their different temporal and spatial resolutions and why these matter
+2.	WorldClim data example
+3.	How to extract estimates from ClimNA
+4.	NOAA data brief example (six-hour temporal resolution)
+o	Download Panoply - https://www.giss.nasa.gov/tools/panoply/download/
 
-`2:45 pm - 3:00 pm`	BREAK
+**Farrah Carrasco-Rueda**
+1.	Raster image visualization in R
+a.	How to enter raster images in R
+b.	Change the projection for the images
+2.	Reclassification of original information. Packages: raster, rgdal, and SDMTools
+3.	Estimate forest cover
+a.	Crop polygons from rasters. Function maptools
+b.	Estimate the amount of forest cover inside the polygons
+4.	Moving window
+5.	How to use LiDAR point-cloud in R
+a.	Quick intro to LiDAR (5 mins.)
+b.	LiDAR visualization
+c.	Classification of points
+d.	Points normalization
+e.	Data visualization (1 or 3 channels)
 
-`3:00 pm - 4:45 pm`	Species classification using NEON hyperspectral data PART 2 - *Sergio Marconi*
-
-`4:45 pm - 5:00 pm` 	FINAL REMARKS
+Sergio Marconi
+1.	Crown Delineation:
+a.	Create a Canopy Height Model out of the LiDAR point-cloud data
+i.	Using a smooth filter: why we want to “reduce the sharpness”
+ii.	Apply Silva et al., 2016 to estimate Individual Tree Crowns (ITCs)
+iii.	The magic of other languages under the hood: polygonise with Python in R
+b.	Extract data from hyperspectral raster for a bunch of crowns
+2.	Species classification
+a.	Data manipulation
+b.	Application of a Random Forest Classifier
+c.	What’s next? An insight on deep learning for species classification 
