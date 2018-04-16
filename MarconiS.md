@@ -23,6 +23,7 @@ In this module we will learn to use LiDAR and hyperspectral data to automaticall
   7. `devtools`
   8. `rlas`
   9. `lidR`
+  10. `FactorMineR`
 4. We suggest you to have the libraries `rlas` and `lidR` installed from latest version on github. 
 
 
@@ -74,15 +75,14 @@ Let's now load a point-cloud dataset, and normalize it. Why are we normalizing? 
 ```{r}
 las = readLAS(paste(pt, f, sep=""))
 lasnormalize(las, method = "knnidw", k = 10L)
-plot(las, color="Intensity", colorPalette = terrain.colors(50), trim=0.95)
 ```
-
 Now, we can plot our pointcloud data for a cool 3D view!
 
 ```{r}
 plot(las, color="Intensity", colorPalette = terrain.colors(50), trim=0.95)
 ```
-IMAGE 
+![classified_las](figures/lidar_perspective.png)
+ 
 
 Not happy with the color palette? you can actually take advantage of the hyperspectral information to add a cool false color palette to your point-cloud view. Let's see how.
 Let's first load our data as a raster stack. Raster stack are way faster than common rasters and allow us to work with rasters with a very high number of bands.We can plot, for example, the combination of band 16, 86 and 177 using 'plotRGB'
@@ -92,7 +92,7 @@ hps   = stack(paste(pt, f_hps, sep =""))
 plotRGB(hps, r=16, g=177, b=86, stretch="lin")
 ```
 
-IMAGE 
+![false_color_hps](figures/false_color_hsp.png) 
 
 Not bad, right? they seem good enough to color our point cloud pixels. Let's extract and normalize them: 
 
@@ -118,8 +118,9 @@ And now, the magic! let's colorize our point-cloud with the three channels just 
 ```{r}
 lascolor(las)
 plot(las, color = "color")
-
 ```
+![classified_las](figures/lidar_perspective.png)
+
 
 ### Create a Canopy Height Model 
 
@@ -131,7 +132,8 @@ chm = grid_canopy(las, res = 0.5, subcircle = 0.2, na.fill = "knnidw", k = 4, p 
 chm = as.raster(chm)
 plot(chm)
 ```
-IMAGE 
+![chm_unsmoothed](figures/chm_no_blur.png)
+ 
 
 Unfortunately, LiDAR point cloud data may be noisy. This can be a problem especially if we go so high resolution. In fact, is a good practice to filter blur the image, just a little, avoiding big artifacts and unnatural crowns
 
@@ -142,7 +144,7 @@ chm = raster::focal(chm, w = kernel, fun = mean)
 plot(chm)
 ```
 
-![chmSmooth](figures/chm_smooth.png)
+![chmSmooth](figures/chm_blur.png)
 
 ### Perform crown delineation using Silva et al., 2016
 
@@ -159,7 +161,7 @@ ttops = tree_detection(chm, 5, 2)
 crowns <-lastrees_silva(las, chm, ttops, max_cr_factor = 0.6, exclusion = 0.3, extra = T)
 plot(crowns)
 ```
-![crowns](figures/crowns.png)
+![crowns](figures/itcs_1km.png)
 
 ### Extract and save single crowns data
 
@@ -175,8 +177,8 @@ itcs<-readOGR(pt, "ground_data")
 itcs <- crop(itcs, extent(chm))
 plot(itcs, add=T)
 ```
+![itc_overimposed](figures/species_with_itc.png)
 
-IMAGE
 
 Those are crowns polygons collected on the field, with associated species identifier. Let's say, we want to extract reflectance and height data to be used to build a statistical model to classify all the crowns we have produced before!
 To extract information from a raster, we'll use the function `extract`
@@ -212,6 +214,7 @@ Now that you know how to extract data for each single crown, and know how to lin
 library(dplyr)
 library(e1071)
 library(tidyr)
+library(FactoMineR)
 ```
 
 Now, let's load some data extracted already in a csv form. These data have the crown identifier, the species, tree height, and spectral reflectance in 426 bands for a bunch of pixels (and 305 individual trees). Data are publicly available as part of a data science competition (Marconi et al., in prep). The whole dataset can be downloaded at: LINK, but for the sake of this workshop, just use the data in the inputs folder. 
@@ -233,7 +236,8 @@ species <- unique(speciesID$species)
 aPixel_spectra <- features[1,3:428]
 plot(as.numeric(aPixel_spectra), type = "l")
 ```
-IMAGE
+![reflectance_raw](figures/spectra_raw.png)
+
 
 As you can see, these data are far from perfect. Especially, there are some regions that are absorbing all the light, no matter which pixel are we in. Those bands are known as **water absorption bands**, and we want to get rid of them. Fortunately, they are always the same, for they depend on hte chemistry of water! We can then point to the `bad bands` and pull them out.
 
@@ -244,8 +248,9 @@ goodBands <- c(1:2, goodBands)
 features <- features[,goodBands]
 plot(as.numeric(features[1,3:371]), type = "l")
 ```
-We basically figured which bands are to be saved, including bands 1 and 2, which are crown identifier and canopy height model. The plotted bands, now, look definitively better!
+![cleaned_spectra](figures/spectra_clean.png)
 
+We basically figured which bands are to be saved, including bands 1 and 2, which are crown identifier and canopy height model. The plotted bands, now, look definitively better!
 
 Now, in the whole scene we may have pixels that are darker, pixels that are withina crown but mostly representing wood, soil, or other stuff than leaves. We want to get rid of those, because the relationship we are looking for is maily attributable to leaves reflectance spectra. In this, the same index we learned about this morning, the NDVI, may come handy. Let's poolish our data of all those pixels with NDVI less than 0.3, that is, all those data point which are far from being green leaves.
 
@@ -254,6 +259,13 @@ ndvi <- (features$band_90- features$band_58)/(features$band_58 + features$band_9
 features[which(ndvi < 0.3),]=NA
 features <- features[complete.cases(features), ]
 ```
+Now, we have a lot of features, most of which, you can tell, are highly correlated. It is good in this case to reduce the number of dimensions by applying a data transformation which can held most of the variability in the data in a way lower number of dimensions. A commonly used technique for that is the PCA.
+
+```{r}
+pca_summary <- PCA(features[-1])
+pca_features <- cbind(features[1], pca_summary$ind$coord)
+```
+![pca1](figures/pca_components.png) ![pca2](figures/pca_position.png)
 
 Now, extremely important when using machine learning methods, is to divide your dataset into a portion used to build the model, and a fully independent dataset, to test if our model is working fine. Those are called respectively `trainset` and `testset`. Generally, you may want to divide the `trainset` in `train` and `validation`, whihc in this case is automatically happening when using cross validation. 
 
@@ -274,8 +286,8 @@ Now, that we know which crown have been divided in the train-test split, let's e
 
 ```{r}
 #create augmented matrixes
-test_set <- inner_join(test_data, features, by = "crown_id")
-train_set <- inner_join(train_data, features, by = "crown_id")
+test_set <- inner_join(test_data, pca_features, by = "crown_id")
+train_set <- inner_join(train_data, pca_features, by = "crown_id")
 ```
 And voila! here is the head of our trainset!
 
@@ -302,7 +314,8 @@ pred_train <- predict(model_svm, data = x)
 #Plot the predictions and the plot to see our model fit
 plot(y, pred_train)
 ```
-IMAGE
+![untuned_train_svm](figures/train_svm.png)
+
 
 We can more intuitively look at what is the accuracy of our model, by calculating the times it gets the right answers, out of thetotal number of pixels in the training set:
 
@@ -315,12 +328,13 @@ Usually, you may want to explore the parameterization space to get the potential
 In SVM, that can be done using the function `tune`:
 
 ```{r}
-svm_tune <- tune(svm, y ~ x)
+svm_tune <- tune(svm, train.x = x, train.y = y, gamma = 2^(-1:1), cost = 2^(2:4))
 best_mod <- svm_tune$best.model
 best_mod_pred <- predict(best_mod, data = x) 
 plot(y, best_mod_pred, pch=4)
 ```
-IMAGE
+![tuned_train_svm](figures/train_cv_svm.png)
+
 Let's see how much it is performing on the training set:
 ```{r}
 svm_accuracy = sum(y == best_mod_pred)/length(y)
@@ -340,7 +354,8 @@ pred_test <- predict(model_svm, newdata = x)
 length(pred_test)
 plot(y_test, pred_test, pch=4)
 ```
-IMAGE
+![untuned_test_svm](figures/test_svm.png)
+
 ```{r}
 svm_accuracy = sum(y_test == pred_test)/length(y_test)
 svm_accuracy
@@ -352,7 +367,8 @@ pred_best_mod_test <- predict(best_mod, newdata = x)
 length(pred_best_mod_test)
 plot(y_test, pred_best_mod_test, pch=4)
 ```
-IMAGE
+![tuned_test_svm](figures/test_cv_svm.png)
+
 ```{r}
 svm_accuracy = sum(y_test == pred_best_mod_test)/length(y_test)
 svm_accuracy
