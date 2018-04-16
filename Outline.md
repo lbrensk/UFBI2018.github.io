@@ -21,6 +21,7 @@ The two-day workshop will take place on **May 8th and 9th**, and will be divided
 | 3:00 pm - 4:45 pm  | BREAK  |
 | 10:30 am - 10:45 pm  | Climate data hands-on examples - *Laura Brenskelle*  |
 | 4:45 pm - 5:00 pm  | Summary for the day  |
+
 <br><br>
 
 
@@ -36,6 +37,7 @@ The two-day workshop will take place on **May 8th and 9th**, and will be divided
 | 3:00 pm - 4:45 pm  | BREAK  |
 | 10:30 am - 10:45 pm  | Species classification using NEON hyperspectral data PART 2 - *Sergio Marconi*  |
 | 4:45 pm - 5:00 pm  | FINAL REMARKS |
+
 <br><br>
 
 
