@@ -21,6 +21,8 @@ The two-day workshop will take place on **May 8th and 9th**, and will be divided
 | 3:00 pm - 4:45 pm  | BREAK  |
 | 10:30 am - 10:45 pm  | Climate data hands-on examples - *Laura Brenskelle*  |
 | 4:45 pm - 5:00 pm  | Summary for the day  |
+<br><br>
+
 
 #### May 9th: Spatial Ecology from Remote sensing
 
@@ -34,6 +36,7 @@ The two-day workshop will take place on **May 8th and 9th**, and will be divided
 | 3:00 pm - 4:45 pm  | BREAK  |
 | 10:30 am - 10:45 pm  | Species classification using NEON hyperspectral data PART 2 - *Sergio Marconi*  |
 | 4:45 pm - 5:00 pm  | FINAL REMARKS |
+<br><br>
 
 
 ## In Detail
@@ -50,6 +53,7 @@ a.	Removing dubious records and missing data
 b.	Removing duplicate records
 c.	Spatial filtering based on geographic boundaries
 d.	Strategies to exclude unnatural occurrences
+<br><br>
 
 **Laura Brenskelle**
 1.	Review different climate data resources
@@ -62,6 +66,7 @@ d.	Their different temporal and spatial resolutions and why these matter
 3.	How to extract estimates from ClimNA
 4.	NOAA data brief example (six-hour temporal resolution)
 o	Download Panoply - https://www.giss.nasa.gov/tools/panoply/download/
+<br><br>
 
 **Farrah Carrasco-Rueda**
 1.	Raster image visualization in R
@@ -78,8 +83,9 @@ b.	LiDAR visualization
 c.	Classification of points
 d.	Points normalization
 e.	Data visualization (1 or 3 channels)
+<br><br>
 
-Sergio Marconi
+**Sergio Marconi**
 1.	Crown Delineation:
 a.	Create a Canopy Height Model out of the LiDAR point-cloud data
 i.	Using a smooth filter: why we want to “reduce the sharpness”
@@ -90,3 +96,5 @@ b.	Extract data from hyperspectral raster for a bunch of crowns
 a.	Data manipulation
 b.	Application of a Random Forest Classifier
 c.	What’s next? An insight on deep learning for species classification 
+<br><br>
+
