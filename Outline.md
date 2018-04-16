@@ -36,7 +36,7 @@ The two-day workshop will take place on **May 8th and 9th**, and will be divided
 | 4:45 pm - 5:00 pm  | FINAL REMARKS |
 
 
-#### In Detail
+## In Detail
 
 **Jon Spoelhof**
 1.	Obtaining occurrence data in R
