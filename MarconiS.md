@@ -63,7 +63,7 @@ Next step, we want to identify the path of the data to be loaded. In this first 
 Then, we'll get the name of the files we are interested to load. To have it automatically done, we'll use the function `list.files`, which returns a character vector, with the name of each single file respecting a defined `pattern`
 
 ```{r}
-pt <-  "./data/delineation/"
+pt <-  "./inputs/delineation/"
 f <- list.files(pt, pattern = ".laz")[1]
 f_hps <- list.files(pt, pattern = "hps.tif")[1]
 ```
@@ -199,8 +199,11 @@ write.csv(canopyHeight, "./data/canopyHeight.csv")
 
 #### CHALLENGE: Calculate NDVI from hyperspectral and plot it!
 
+Now that you know how to extract values from a raster, try to calculate the NDVI from the hiperspectral image and store it in a csv file. Remember, the bands used to calculate the NDVI in hierspsectral setting are `band_90` and `band_58`
 
 ## Species classification from hyperspectral module:
+
+Now that you know how to extract data for each single crown, and know how to link information from the ground to the produced polygons, you have everything you need to build a statistical model to automatically determine which species each crown in the area is. In this submodule you'll learn to deal with hiperspectral data, how to correctly divide your dataset to avoid overfitting, and how to aggregate your results to individual crown level. First, you need to load some libraries to manipulate your data and build/test a Support Vector Machine (SVM)
 
 ```{r}
 library(dplyr)
@@ -208,6 +211,7 @@ library(e1071)
 library(tidyr)
 ```
 
+Now, let's load some data extracted already in a csv form. These data have been used in a 
 ```{r}
 # load a complete dataset
 pt <-  "./data/classification/"
