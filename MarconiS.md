@@ -223,10 +223,10 @@ First step, let's import our features (*hyper_bands_train.csv*) and response var
 
 ```{r}
 # load a complete dataset
-pt <-  "./data/classification/"
-features <- read_csv("./data/classification/hyper_bands_train.csv")
+pt <-  "./inputs/classification/"
+features <- read_csv("./inputs/classification/hyper_bands_train.csv")
 head(features)
-speciesID <- read_csv("./data/classification/species_id_train.csv")
+speciesID <- read_csv("./inputs/classification/species_id_train.csv")
 ```
 
 We can look now at the reflectance spectra of a pixel:
@@ -322,6 +322,8 @@ We can more intuitively look at what is the accuracy of our model, by calculatin
 ```{r}
 svm_accuracy = sum(y == pred_train)/length(y)
 svm_accuracy
+
+# [1] 0.8798367
 ```
 
 Usually, you may want to explore the parameterization space to get the potential best options, yes, but is good practive to do so on different combinations of data. Why is that? because the model may be fitting on the data, and not get realistic patterns. Usually, to reduce that problem, we divide the traininset in 10 folds, and sequenially build a svm with a bunch of different parameters combiantions on 9 folds, and validate on the remaining 1. This way, we can calculate among the different combinations, which one is performing the best on the training-valiadtion set, accounting for all 10 combinations.
@@ -339,6 +341,8 @@ Let's see how much it is performing on the training set:
 ```{r}
 svm_accuracy = sum(y == best_mod_pred)/length(y)
 svm_accuracy
+
+# [1] 0.9204828
 ```
 
 Not bad! But remember: that is what the model has **memorized**, not necessarily what it **learned**! What does it mean? Simply that the model used the same data to build a relationship between the species labels and the features provided. It memorized what's the pattern observed for these data, adn is prone to over perform on them. Sometimes, it may have learned patterns that don't even realy exist! That is why it is important to test our model on new data, and see if what it says it learned, is not the Christmas poem!
@@ -359,6 +363,8 @@ plot(y_test, pred_test, pch=4)
 ```{r}
 svm_accuracy = sum(y_test == pred_test)/length(y_test)
 svm_accuracy
+
+# [1] 0.7101086
 ```
 See? performance naturally go lower on independent data! 
 
@@ -372,6 +378,8 @@ plot(y_test, pred_best_mod_test, pch=4)
 ```{r}
 svm_accuracy = sum(y_test == pred_best_mod_test)/length(y_test)
 svm_accuracy
+
+# [1] 0.7126149
 ```
 And supposedly, even if seems worse on the training set, using cross validation ensures better predictions on the test set!
 That said, it is not that bad, is it?
@@ -409,5 +417,7 @@ majority_class <- apply(confusion,1, which.max)
 majority_class <- colnames(confusion)[majority_class]
 svm_accuracy = sum(test_data$species_id == majority_class)/length(test_data$species_id)
 svm_accuracy
+
+# [1] 0.5081967
 ```
 Weeeell, we were expecting more, right? Yet, there is a bunch of other cool stuff you can do to make it better, like reduce the amount of predictors by performing PCA, normalize the variance of our predictors, or even chose a more promising algorithm! Now you have the data: you can play to find a better solution than this baseline! 
