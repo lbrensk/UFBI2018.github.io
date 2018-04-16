@@ -12,7 +12,7 @@ In this module we will learn to use LiDAR and hyperspectral data to automaticall
 
 ### Before starting, you will need:
 1. Intermediate knowledge of R
-2. **[Download](https://www.dropbox.com/s/28ix97jrq9zu3a3/inputs.zip?dl=0)** the dataset we'll use for this lesson
+2. **[Download](https://drive.google.com/open?id=1vfTqQVlpjKz4xhgGvYdjlnsIfnqOZA5K)** the dataset we'll use for this lesson
 3. have the following libraries installed:
   1. `raster`
   2. `rgdal`
@@ -46,7 +46,7 @@ In this module we will learn to use LiDAR and hyperspectral data to automaticall
 
 ### Visualize LiDAR data
 
-First of all, we will need our dataset to play with. You can download it from **[here](https://www.dropbox.com/s/28ix97jrq9zu3a3/inputs.zip?dl=0)**
+First of all, we will need our dataset to play with. You can download it from **[here](https://drive.google.com/open?id=1vfTqQVlpjKz4xhgGvYdjlnsIfnqOZA5K)**
 
 
 ```{r}
