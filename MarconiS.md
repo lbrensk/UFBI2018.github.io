@@ -35,7 +35,7 @@ In this module we will learn to use LiDAR and hyperspectral data to automaticall
 #### Species classification from hyperspectral module:
 - Pre-processing of hyperspectral pixels
 - Stratified sampling by species 
-- applying a Support Vector Machine (SVM) to the data (the easy way)
+- Applying a Support Vector Machine (SVM) to the data (the easy way)
 - (tuning SVM parameters with 10-fold Cross Validation (10k-CV))
 - Crown predictions and confusion proportions
 
@@ -293,7 +293,7 @@ x <- data.matrix(train_set[,-(1:2)])
 Oooook, everything is ready! Let's build our simple SVM out of the train data!
 
 ```{r}
-model_svm <- svm((y) ~ x,  kernel = "linear")}
+model_svm <- svm((y) ~ x)
 ```
 Now, let's see what our model has memorized in his algorithm!
 
@@ -315,7 +315,7 @@ Usually, you may want to explore the parameterization space to get the potential
 In SVM, that can be done using the function `tune`:
 
 ```{r}
-svm_tune <- tune(svm, y ~ x,  kernel = "linear")
+svm_tune <- tune(svm, y ~ x)
 best_mod <- svm_tune$best.model
 best_mod_pred <- predict(best_mod, data = x) 
 plot(y, best_mod_pred, pch=4)
@@ -333,7 +333,7 @@ Not bad! But remember: that is what the model has **memorized**, not necessarily
 x <- data.matrix(test_set[,-(1:2)])
 y_test <- factor(test_set$species_id)
 ```
-#now, let's see how the two perform on an inependent test
+#now, let's see how the two perform on an independent test dataset
 
 ```{r}
 pred_test <- predict(model_svm, newdata = x)
@@ -345,6 +345,8 @@ IMAGE
 svm_accuracy = sum(y_test == pred_test)/length(y_test)
 svm_accuracy
 ```
+See? performance naturally go lower on independent data! 
+
 ```{r}
 pred_best_mod_test <- predict(best_mod, newdata = x)
 length(pred_best_mod_test)
@@ -355,6 +357,13 @@ IMAGE
 svm_accuracy = sum(y_test == pred_best_mod_test)/length(y_test)
 svm_accuracy
 ```
+And supposedly, even if seems worse on the training set, using cross validation ensures better predictions on the test set!
+That said, it is not that bad, is it?
+However, don't forget one thing: these are pixel based results! We may be very good in getting the most common widest crowns, but very bad in anything else! Let's see how our SVM is performing on each single crown!
+
+### Crown predictions and confusion proportions
+
+First step, we want to calculate the frequencies at which each species is predicted within a crown. One way to do that, using the results of the model we have built already, is to aggregate pixel based results to crown level, and calculate the frequency of getting any species in them. To do so, we'll manipulate data using `dplyr`.
 
 ```{r}
 #aggregate results to objects
@@ -366,20 +375,23 @@ prob_vector_test <- results %>%
   mutate(freq = n / sum(n))
 ```
 
+We want to make it in such a way that each species label is the same as the levels of our species_id factor, and that it is in a `data.frame` where each row represents a secific crown, and each column the frequency of pixels belonging to a particular species. Again, we'll use 'dplyr' data manipulation skills to have it done in a few lines.
+
 ```{r}
 prob_vector_test$species_id <- levels(pred_test)[prob_vector_test$species_id]
 # create confusion matrix
-confusion <- prob_vector_test %>%
+frequency <- prob_vector_test %>%
   select(-(n))%>%
   spread(crown_id, freq) 
-confusion <- t(confusion)
-colnames(confusion) <- confusion[1,]
-confusion <- confusion[-1,]
+frequency <- t(frequency)
+colnames(frequency) <- frequency[1,]
+frequency <- frequency[-1,]
 ```
-
+Finally let's see: how good is our model in getting individual tree crowns classification?
 ```{r}
 majority_class <- apply(confusion,1, which.max)
 majority_class <- colnames(confusion)[majority_class]
 svm_accuracy = sum(test_data$species_id == majority_class)/length(test_data$species_id)
 svm_accuracy
 ```
+Weeeell, we were expecting more, right? Yet, there is a bunch of other cool stuff you can do to make it better, like reduce the amount of predictors by performing PCA, normalize the variance of our predictors, or even chose a more promising algorithm! Now you have the data: you can play to find a better solution than this baseline! 
