@@ -29,15 +29,6 @@ library(spocc)
 library(taxize)
 ```
 
-```{r}
-library(taxize)
-library(spocc)
-library(dplyr)
-library(raster)
-library(rgdal)
-library(maps)
-```
-
 Next, set a working directory.
 
 ```{r}
@@ -72,12 +63,6 @@ name_query = tnrs(species,
                   source = "iPlant_TNRS")
 
 name_query
-```
-
-```{r}
-species = c("Epidendrum arachnoides",
-            "Epidendrum nocturnum",
-            "Epidendrum ciliaris")
 ```
 
 ```{r}
@@ -183,10 +168,6 @@ occ_total = data.frame(name = raw$name,
                                   raw$uuid,
                                   na.rm = T),
                        stringsAsFactors = F)
-```
-
-```{r}
-occ_total = read.csv("occurrences.csv", stringsAsFactors = F)
 ```
 
 Now, let's find out how many records we obtained for each species
@@ -318,10 +299,6 @@ land = readOGR("ne_10m_land")
 lakes = readOGR("ne_10m_lakes")
 ```
 
-```{r}
-land = readOGR("ne_10m_land")
-lakes = readOGR("ne_10m_lakes")
-```
 
 We can check the lon/lat coordinates of our occurrences against these maps to make sure the none of our orchid records came from dubious aquatic locations (if you were searching for shark occurrences, you would do the opposite).
 
