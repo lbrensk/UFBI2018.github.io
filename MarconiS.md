@@ -144,7 +144,7 @@ chm = raster::focal(chm, w = kernel, fun = mean)
 plot(chm)
 ```
 
-![chmSmooth](figures/chm_blur.png)
+![chm_smoothed](figures/chm_blur.png)
 
 ### Perform crown delineation using Silva et al., 2016
 
