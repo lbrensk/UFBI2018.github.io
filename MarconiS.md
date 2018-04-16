@@ -4,6 +4,7 @@ title:  Ecology with NEON AOP
 permalink: /MarconiS/
 ---
 
+
 ## Crown segmentation and identification with LiDAR and Hiperspectral data
 
 In this module we will learn to use LiDAR and hyperspectral data to automatically extract ecological information about individual trees at landscape scale. 
@@ -160,4 +161,185 @@ plot(crowns)
 ```
 ![crowns](figures/crowns.png)
 
+### Extract and save single crowns data
 
+Now, we happily have produced a raster with single crowns, which you can transform in a polygon layer, if you want (for time sake, that's not something we'll do here).
+*What can we do with these crowns, though?*
+
+Most of the time, in Forestry and Ecology, we collect a sample of data, and that's what we use for assessments. *What if we could align data collected on the field with the remote sensing data, and use their combination to have better more comprehensive information?* 
+Well, it would be awesome, no!? Let's see how to!
+First of all, let's load part of the data published from a recent Data Science Evaluation (ref):
+
+```{r}
+itcs<-readOGR(pt, "ground_data")
+itcs <- crop(itcs, extent(chm))
+plot(itcs, add=T)
+```
+
+IMAGE
+
+Those are crowns polygons collected on the field, with associated species identifier. Let's say, we want to extract reflectance and height data to be used to build a statistical model to classify all the crowns we have produced before!
+To extract information from a raster, we'll use the function `extract`
+
+```{r}
+crown_data_chm <- extract(chm, itcs)
+```
+
+```{r}
+canopyHeight <- data.frame(matrix(NA, nrow=0, ncol = 2))
+colnames(canopyHeight) <- c("ITC, average_H")
+for(itc_id in 1:length(crown_data_chm)){
+  print(itc_id)
+  temp <- c(itc_id, max(unlist(crown_data_chm[itc_id])))
+  canopyHeight <- rbind(canopyHeight, temp)
+}
+head(canopyHeight)
+write.csv(canopyHeight, "./data/canopyHeight.csv")
+```
+
+#### CHALLENGE: Calculate NDVI from hyperspectral and plot it!
+
+
+## Species classification from hyperspectral module:
+
+```{r}
+library(dplyr)
+library(e1071)
+library(tidyr)
+```
+
+```{r}
+# load a complete dataset
+pt <-  "./data/classification/"
+features <- read_csv("./data/classification/hyper_bands_train.csv")
+head(features)
+speciesID <- read_csv("./data/classification/species_id_train.csv")
+```
+
+
+```{r}
+species <- unique(speciesID$species)
+aPixel_spectra <- features[1,3:428]
+plot(as.numeric(aPixel_spectra), type = "l")
+```
+IMAGE
+
+```{r}
+bandsMetadata <- read_csv("data/classification/hyper_bands.csv")
+goodBands <- which(bandsMetadata$Noise_flag==0)+2
+goodBands <- c(1:2, goodBands)
+features <- features[,goodBands]
+plot(as.numeric(features[1,3:371]), type = "l")
+```
+
+```{r}
+ndvi <- (features$band_90- features$band_58)/(features$band_58 + features$band_90)
+features[which(ndvi < 0.3),]=NA
+features <- features[complete.cases(features), ]
+```
+
+```{r}
+
+# divide data in training, validation, and test
+length(unique(features$crown_id))
+set.seed(1)
+test_data <- speciesID %>% 
+  group_by(species_id) %>%
+  sample_frac(0.2)
+train_data <- speciesID[!(speciesID$crown_id %in% test_data$crown_id), ]
+```
+```{r}
+#create augmented matrixes
+test_set <- inner_join(test_data, features, by = "crown_id")
+train_set <- inner_join(train_data, features, by = "crown_id")
+```
+
+```{r}
+head(train_set)[,1:6]
+```
+
+```{r}
+train_set$species_id <- factor(train_set$species_id)
+y <- (train_set$species_id)
+x <- data.matrix(train_set[,-(1:2)])
+```
+```{r}
+model_svm <- svm((y) ~ x,  kernel = "linear")}
+```
+
+```{r}
+pred_train <- predict(model_svm, data = x)
+#Plot the predictions and the plot to see our model fit
+plot(y, pred_train)
+```
+IMAGE
+
+```{r}
+svm_accuracy = sum(y == pred_train)/length(y)
+svm_accuracy
+```
+```{r}
+svm_tune <- tune(svm, y ~ x,  kernel = "linear")
+best_mod <- svm_tune$best.model
+best_mod_pred <- predict(best_mod, data = x) 
+plot(y, best_mod_pred, pch=4)
+```
+IMAGE
+```{r}
+svm_accuracy = sum(y == best_mod_pred)/length(y)
+svm_accuracy
+```
+```{r}
+x <- data.matrix(test_set[,-(1:2)])
+y_test <- factor(test_set$species_id)
+```
+#now, let's see how the two perform on an inependent test
+
+```{r}
+pred_test <- predict(model_svm, newdata = x)
+length(pred_test)
+plot(y_test, pred_test, pch=4)
+```
+IMAGE
+```{r}
+svm_accuracy = sum(y_test == pred_test)/length(y_test)
+svm_accuracy
+```
+```{r}
+pred_best_mod_test <- predict(best_mod, newdata = x)
+length(pred_best_mod_test)
+plot(y_test, pred_best_mod_test, pch=4)
+```
+IMAGE
+```{r}
+svm_accuracy = sum(y_test == pred_best_mod_test)/length(y_test)
+svm_accuracy
+```
+
+```{r}
+#aggregate results to objects
+results <- as.data.frame(cbind(test_set$crown_id, pred_test))
+colnames(results) <- c("crown_id", "species_id")
+prob_vector_test <- results %>%
+  group_by(crown_id) %>%
+  count(species_id) %>%
+  mutate(freq = n / sum(n))
+```
+
+```{r}
+prob_vector_test$species_id <- levels(pred_test)[prob_vector_test$species_id]
+# create confusion matrix
+confusion <- prob_vector_test %>%
+  select(-(n))%>%
+  spread(crown_id, freq) 
+confusion <- t(confusion)
+colnames(confusion) <- confusion[1,]
+confusion <- confusion[-1,]
+```
+
+```{r}
+majority_class <- apply(confusion,1, which.max)
+majority_class <- colnames(confusion)[majority_class]
+svm_accuracy = sum(test_data$species_id == majority_class)/length(test_data$species_id)
+svm_accuracy
+```
