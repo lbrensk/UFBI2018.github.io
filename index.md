@@ -19,3 +19,5 @@ We, the 2017-18 UFBI fellows, are happy to offer an indoor workshop on methods u
 
 1.     Raster images and estimation of forest cover in R
 2.     Crown segmentation and species identification with LiDAR and Hyperspectral data
+
+If you are interested, please **[register here](https://biodiversity.institute.ufl.edu/2018/03/registration-spatial-ecology-workshop/)**! There is space for up to 25 people!
