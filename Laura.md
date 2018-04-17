@@ -16,44 +16,39 @@ If you have a Mac, you may require a few other programs to run ClimNA, which is 
 
 ***
 
-First, set a folder where you will have shapefiles and images
+## ClimNA example
+
+First, set your working directory if you have not already.
 
 ```{r}
-setwd("~/Documents/PhD.Dissertation/Campo2017/Maps&Imagenes/Bosque_No_Bosque_2016_Hib_Raster")
+setwd("~/Desktop/UFBI workshop example/");
 ```
 
-
-#### you will need:
-1. intermediate knowledge of R
-2. the following packages:
+You will need these libraries. First, we will practice pulling and cleaning occurrence data, but for this example, we will use GBIF. 
 
 ```{r}
-library(raster)
-library(SDMTools)
-library(maptools)
-library(rgdal)
+library(rgbif);
+library(scrubr);
 ```
-
-## Uploading raster files
+Let's search for armadillo (*Dasypus novemcinctus*) occurrences! Specifically, we need occurrences that have latitude, longitude, and elevation data. You'll notice in the code that we are limiting our search to 1000 records; this is only of demonstration purposes. I do not want ClimNA to be bogged down creating data records for thousands of occurrences while we wait in the workshop.
 
 ```{r}
-Forest <- raster("Bosque_No_bosque_2016.tif")
+species <- "Dasypus novemcinctus"
+> occ <- occ_search(scientificName = "Dasypus novemcinctus", hasCoordinate = TRUE, fields = c("name", "key", "decimalLatitude", "decimalLongitude", "elevation"), limit = 1000, return = 'data')
 ```
 
-To know the projection of the raster
+Now we are going to clean up our 1000 records to narrow it down further. We only want occurrence records that have data in all of the fields we've specified in our search.
 
 ```{r}
-projection(Forest)
+cleaned_occ <- (as.data.frame(occ)[complete.cases(as.data.frame(occ)), ])
 ```
 
-To know the resolution of the raster
+Next, let's clean these data to get rid of incomplete coordinates, unlikely coordinates, and duplicate records.
 
 ```{r}
-res(Forest)
+scrubbed <- coord_incomplete(cleaned_occ)
+scrubbed_data <- coord_unlikely(scrubbed)
+unique_data <- unique(scrubbed_data)
+view(unique_data);
 ```
-
-To plot the raster, in this case this is for whole country
-
-```{r}
-plot(Forest)
-```
+You'll notice even after these simple cleaning steps, we have gone from 1000 records to only 121, but for our purposes here, this is fine.
