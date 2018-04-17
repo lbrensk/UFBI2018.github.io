@@ -46,6 +46,8 @@ dasypus <- data[,c(3,16,17,18,21)]
 View(dasypus)
 ```
 
+![Image of Yaktocat](https://lh3.googleusercontent.com/NwM-eLK66s0xTAC5lCR2lQQYvB_8SB0uToz556N9PiYr0IxgzFu-3AYLf2grSZy9B9nam41bGMhZPBCA3bB-Nk8sQpZdqr3OGLmZBsTAmDBjX8Vi3MC1iVKuhA1W7QVi3eWIJ3DTgROLwi36yyL9m8nXg3_Ii_4ZjhzCUf5OhzUXlg2LbXmA9tyRPJgCGi7GAO31hxV7TcoTya9zvGirTlmj0o0-17KhyEOHIZua3v0QqGG5DR6BOKFCI1mq5VeMzRHB7O2hYO0PBM9QdPNZ6BIs-wAN6Do0t8TCF1iZa3gQ206noWaPRA8A11pl8c_Fpq6bFKFrU0jh0NDnY_3EU63BNf7zzY7JmkZiGVquW7LagCKGC7xLeKEs8xEz6bsMSLwBcZgExXl_dMreKitrYaMmeNa5_yieKSskHlb4pauPZPuacco4OPs55HajzD-F4DCmCK2ajc3HKK8irbwWPRzoFs8EBBqjdBaMZFbZF7Ca1wgd8J6U9sxKEgvz68es8LMxJrAaaNWwkoTq1O_Ga2NLczH-N0nTZTFX-PL2rcE7fVNWF0b8AUyE9E5O7JWIb9FcXSh8xPd_Cd-oEJSt9-jTuzVQ4CMP3pyNgqM=w1556-h1230-no)
+
 Now we are going to clean up our 1000 records to narrow it down further. We only want occurrence records that have data in all of the fields we've specified in our search.
 
 ```{r}
