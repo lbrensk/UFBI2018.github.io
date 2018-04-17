@@ -38,7 +38,7 @@ dasypus_novemcinctus_gbif <- read_csv("~/Desktop/UFBI workshop example/Armadillo
 View(dasypus_novemcinctus_gbif)
 ```
 
-This dataset contains a lot more data than we need for running ClimNA. Let's first transform this into a data frame and extract only the columns necessary for the ClimNA program to run.
+This dataset contains a lot more data than we need for running ClimNA. Let's first transform this into a data frame and extract only the columns necessary for the ClimNA program to run: occurrenceID, publishing organization code, latitude, longitude, and elevation.
 
 ```{r}
 data <- data.frame(dasypus_novemcinctus_gbif)
