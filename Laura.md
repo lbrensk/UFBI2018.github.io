@@ -22,18 +22,13 @@ If you have a Mac, you may require a few other programs to run ClimNA, which is 
 
 ## ClimNA example
 
-First, set your working directory if you have not already.
+You will need to download the data file called "dasypus_novemcinctus_gbif.csv". This is a dataset I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the scrubr library.
 
 ```{r}
 setwd("~/Desktop/UFBI workshop example/");
-```
-
-You will need these libraries. First, we will practice pulling and cleaning occurrence data, but for this example, we will just use GBIF. 
-
-```{r}
-library(rgbif);
 library(scrubr);
 ```
+
 Let's search for armadillo (*Dasypus novemcinctus*) occurrences! Specifically, we need occurrences that have latitude, longitude, and elevation data. You'll notice in the code that we are limiting our search to 1000 records; this is only of demonstration purposes. I do not want ClimNA to be bogged down creating data records for thousands of occurrences while we wait in the workshop.
 
 ```{r}
