@@ -16,6 +16,10 @@ If you have a Mac, you may require a few other programs to run ClimNA, which is 
 
 ***
 
+## Climate data resources overview
+
+***
+
 ## ClimNA example
 
 First, set your working directory if you have not already.
@@ -24,7 +28,7 @@ First, set your working directory if you have not already.
 setwd("~/Desktop/UFBI workshop example/");
 ```
 
-You will need these libraries. First, we will practice pulling and cleaning occurrence data, but for this example, we will use GBIF. 
+You will need these libraries. First, we will practice pulling and cleaning occurrence data, but for this example, we will just use GBIF. 
 
 ```{r}
 library(rgbif);
@@ -52,3 +56,5 @@ unique_data <- unique(scrubbed_data)
 view(unique_data);
 ```
 You'll notice even after these simple cleaning steps, we have gone from 1000 records to only 121, but for our purposes here, this is fine.
+
+Next, we will have to do some reformatting because ClimNA is particular about the formatting of the .csv you give it.
