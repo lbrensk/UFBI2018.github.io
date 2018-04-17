@@ -22,18 +22,28 @@ If you have a Mac, you may require a few other programs to run ClimNA, which is 
 
 ## ClimNA example
 
-You will need to download the data file called "dasypus_novemcinctus_gbif.csv". This is a dataset I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the scrubr library.
+You will need to download the data file called "dasypus_novemcinctus_gbif.csv". This is a dataset of nine-banded armadillo (*Dasypus novemcinctus*) occurrences that I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries.
 
 ```{r}
 setwd("~/Desktop/UFBI workshop example/");
 library(scrubr);
+library(readr);
 ```
 
-Let's search for armadillo (*Dasypus novemcinctus*) occurrences! Specifically, we need occurrences that have latitude, longitude, and elevation data. You'll notice in the code that we are limiting our search to 1000 records; this is only of demonstration purposes. I do not want ClimNA to be bogged down creating data records for thousands of occurrences while we wait in the workshop.
+Load the dataset you downloaded into R.
 
 ```{r}
-species <- "Dasypus novemcinctus"
-> occ <- occ_search(scientificName = "Dasypus novemcinctus", hasCoordinate = TRUE, fields = c("name", "key", "decimalLatitude", "decimalLongitude", "elevation"), limit = 1000, return = 'data')
+library(readr)
+dasypus_novemcinctus_gbif <- read_csv("~/Desktop/UFBI workshop example/Armadillo/dasypus-novemcinctus-gbif.csv")
+View(dasypus_novemcinctus_gbif)
+```
+
+This dataset contains a lot more data than we need for running ClimNA. Let's first transform this into a data frame and extract only the columns necessary for the ClimNA program to run.
+
+```{r}
+data <- data.frame(dasypus_novemcinctus_gbif)
+dasypus <- data[,c(3,16,17,18,21)]
+View(dasypus)
 ```
 
 Now we are going to clean up our 1000 records to narrow it down further. We only want occurrence records that have data in all of the fields we've specified in our search.
