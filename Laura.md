@@ -72,7 +72,14 @@ Next, we will have to do some reformatting because ClimNA is particular about th
 names(unique_data) <- c("ID1", "ID2", "lat", "long", "el", "date")
 View(unique_data)
 ```
-ClimNA is very picky about formatting. Above, we renamed our columns to suit the required formatting: occurrenceID -> ID1, publishingorgkey -> ID2, decimallatitude -> lat, decimallongitude -> long, and elevation -> el. ClimNA itself does not care about or want the eventDate -> date information. However, we will need it for processing post-ClimNA so we will save a copy of these data with the date column intact, then delete this column and save the dataset to be put into ClimNA.
+ClimNA is very picky about formatting. Above, we renamed our columns to suit the required formatting:<br>
+occurrenceID -> ID1<br>
+publishingorgkey -> ID2<br>
+decimallatitude -> lat<br>
+decimallongitude -> long<br>
+elevation -> el<br>
+
+ClimNA itself does not care about or want the eventDate -> date information. However, we will need it for processing post-ClimNA so we will save a copy of these data with the date column intact, then delete this column and save the dataset to be put into ClimNA.
 
 ```{r}
 write.csv(unique_data, "Hemaris-clean-dates.csv", row.names = F)
