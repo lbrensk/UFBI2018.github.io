@@ -50,10 +50,10 @@ View(hemaris)
 
 ![Image of Screen after this step](https://lh3.googleusercontent.com/mnUnNg5fV_C6jMnoCmUArq1TlP1DBFIx1eU_kiX3eTuykylqSkwNSgbLtAiOR8P29Nc-vQTDt8-nTr56wZrAq7EW0u9V9ypNgS6x5r3-OpYXutYbJnrdCzWoziT9F7kuFP8bnL80bQ44Ooy_JHQ7wmWJyZiJtYPCyBbRJcMCGbjjlwZyYxxEGZ5jSxO3Em2dOJH6wQukjmxK6mx47nh9g52PGZMzw0vjKfGjmukM_vKXaa8svfPj7S_QFI10zw1W61bx1XVAJ4gW7kFW3Znl_Y9XAC1QQ0EzQ51Hb7SYh44oeMWKKSKE9CLGiJhVwq1cMHUQWRxPw1uSlgKse9WuKZOzGq3vY7XVRN1cocEn7uz7GAwrkF3Ns9b-w0JgefNrMYsrhC8t6D9rrI0prhwmZPM2WC-6iHGYID62foMG-2O9th14b1pTzAHUQ--6TGY7_6dJo6q1mbPAeQc9OMrQdb-1b_xdymI79ACPrcn73MaQGN_jBruVWPgJFtWhSaNbktazRYLibqnMPlN08QkpGnmMmWzEN5dtTLn0IO-Gmcetgh6CqflRXUkMztXx4QnWMrFcn5ZJ_HZ6ComTwAHxGRV2X5pOIocR0rfNaOyEsr3U3LD7yZ9WrwtlwHEo1U21LCityKLqGkyAVfWOZ8PCjWDtCSUc-Ng7=w1141-h471-no)
 
-Now we are going to clean up our 1000 records to narrow it down further. We only want occurrence records that have data in all of the fields we've specified in our search.
+Now we are going to clean up our 1421 records to narrow it down further. We only want occurrence records that have data in all of the fields we've specified in our search.
 
 ```{r}
-cleaned_occ <- (as.data.frame(occ)[complete.cases(as.data.frame(occ)), ])
+cleaned_occ <- (as.data.frame(hemaris)[complete.cases(as.data.frame(hemaris)), ])
 ```
 
 Next, let's clean these data to get rid of incomplete coordinates, unlikely coordinates, and duplicate records.
@@ -62,7 +62,7 @@ Next, let's clean these data to get rid of incomplete coordinates, unlikely coor
 scrubbed <- coord_incomplete(cleaned_occ)
 scrubbed_data <- coord_unlikely(scrubbed)
 unique_data <- unique(scrubbed_data)
-view(unique_data);
+View(unique_data)
 ```
 You'll notice even after these simple cleaning steps, we have gone from 1421 records to only 16, but for our purposes here, this is ideal.
 
