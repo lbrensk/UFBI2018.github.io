@@ -22,31 +22,33 @@ If you have a Mac, you may require a few other programs to run ClimNA, which is 
 
 ## ClimNA example
 
-You will need to download the data file called "dasypus_novemcinctus_gbif.csv". This is a dataset of nine-banded armadillo (*Dasypus novemcinctus*) occurrences that I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries.
+You will need to download the data file called "dasypus_novemcinctus_gbif.csv". This is a dataset of hummingbird clearwing moth (*Hemaris thysbe*) occurrences that I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries. You will also need to install the R package dismo.
 
 ```{r}
 setwd("~/Desktop/UFBI workshop example/");
 library(scrubr);
 library(readr);
+#install.packages("dismo");
+library(dismo);
 ```
 
 Load the dataset you downloaded into R.
 
 ```{r}
 library(readr)
-dasypus_novemcinctus_gbif <- read_csv("~/Desktop/UFBI workshop example/Armadillo/dasypus-novemcinctus-gbif.csv")
-View(dasypus_novemcinctus_gbif)
+hemaris_gbif <- read_csv("~/Desktop/UFBI workshop example/Armadillo/dasypus-novemcinctus-gbif.csv")
+View(hemaris_gbif)
 ```
 
-This dataset contains a lot more data than we need for running ClimNA. Let's first transform this into a data frame and extract only the columns necessary for the ClimNA program to run: occurrenceID, publishing organization code, latitude, longitude, and elevation.
+This dataset contains a lot more data than we need for running ClimNA. Let's first transform this into a data frame and extract only the necessary columns necessary: occurrenceID, publishing organization code, latitude, longitude, elevation, and event date.
 
 ```{r}
-data <- data.frame(dasypus_novemcinctus_gbif)
-dasypus <- data[,c(3,16,17,18,21)]
-View(dasypus)
+data <- data.frame(hemaris_gbif)
+hemaris <- data[,c(3,16,17,18,21,25)]
+View(hemaris)
 ```
 
-![Image of Yaktocat](https://lh3.googleusercontent.com/NwM-eLK66s0xTAC5lCR2lQQYvB_8SB0uToz556N9PiYr0IxgzFu-3AYLf2grSZy9B9nam41bGMhZPBCA3bB-Nk8sQpZdqr3OGLmZBsTAmDBjX8Vi3MC1iVKuhA1W7QVi3eWIJ3DTgROLwi36yyL9m8nXg3_Ii_4ZjhzCUf5OhzUXlg2LbXmA9tyRPJgCGi7GAO31hxV7TcoTya9zvGirTlmj0o0-17KhyEOHIZua3v0QqGG5DR6BOKFCI1mq5VeMzRHB7O2hYO0PBM9QdPNZ6BIs-wAN6Do0t8TCF1iZa3gQ206noWaPRA8A11pl8c_Fpq6bFKFrU0jh0NDnY_3EU63BNf7zzY7JmkZiGVquW7LagCKGC7xLeKEs8xEz6bsMSLwBcZgExXl_dMreKitrYaMmeNa5_yieKSskHlb4pauPZPuacco4OPs55HajzD-F4DCmCK2ajc3HKK8irbwWPRzoFs8EBBqjdBaMZFbZF7Ca1wgd8J6U9sxKEgvz68es8LMxJrAaaNWwkoTq1O_Ga2NLczH-N0nTZTFX-PL2rcE7fVNWF0b8AUyE9E5O7JWIb9FcXSh8xPd_Cd-oEJSt9-jTuzVQ4CMP3pyNgqM=w1556-h1230-no)
+![Image of Screen after this step](https://lh3.googleusercontent.com/mnUnNg5fV_C6jMnoCmUArq1TlP1DBFIx1eU_kiX3eTuykylqSkwNSgbLtAiOR8P29Nc-vQTDt8-nTr56wZrAq7EW0u9V9ypNgS6x5r3-OpYXutYbJnrdCzWoziT9F7kuFP8bnL80bQ44Ooy_JHQ7wmWJyZiJtYPCyBbRJcMCGbjjlwZyYxxEGZ5jSxO3Em2dOJH6wQukjmxK6mx47nh9g52PGZMzw0vjKfGjmukM_vKXaa8svfPj7S_QFI10zw1W61bx1XVAJ4gW7kFW3Znl_Y9XAC1QQ0EzQ51Hb7SYh44oeMWKKSKE9CLGiJhVwq1cMHUQWRxPw1uSlgKse9WuKZOzGq3vY7XVRN1cocEn7uz7GAwrkF3Ns9b-w0JgefNrMYsrhC8t6D9rrI0prhwmZPM2WC-6iHGYID62foMG-2O9th14b1pTzAHUQ--6TGY7_6dJo6q1mbPAeQc9OMrQdb-1b_xdymI79ACPrcn73MaQGN_jBruVWPgJFtWhSaNbktazRYLibqnMPlN08QkpGnmMmWzEN5dtTLn0IO-Gmcetgh6CqflRXUkMztXx4QnWMrFcn5ZJ_HZ6ComTwAHxGRV2X5pOIocR0rfNaOyEsr3U3LD7yZ9WrwtlwHEo1U21LCityKLqGkyAVfWOZ8PCjWDtCSUc-Ng7=w1141-h471-no)
 
 Now we are going to clean up our 1000 records to narrow it down further. We only want occurrence records that have data in all of the fields we've specified in our search.
 
@@ -62,6 +64,6 @@ scrubbed_data <- coord_unlikely(scrubbed)
 unique_data <- unique(scrubbed_data)
 view(unique_data);
 ```
-You'll notice even after these simple cleaning steps, we have gone from 1000 records to only 121, but for our purposes here, this is fine.
+You'll notice even after these simple cleaning steps, we have gone from 1421 records to only 16, but for our purposes here, this is ideal.
 
 Next, we will have to do some reformatting because ClimNA is particular about the formatting of the .csv you give it.
