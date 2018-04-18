@@ -79,6 +79,8 @@ decimallatitude -> lat<br>
 decimallongitude -> long<br>
 elevation -> el<br>
 
+The two ID fields are important if you want to go back to the larger spreadsheet that we cleaned to view or verify the rest of the associated information with the specimens you are using in your analysis.
+
 ClimNA itself does not care about or want the eventDate -> date information. However, we will need it for processing post-ClimNA so we will save a copy of these data with the date column intact, then delete this column and save the dataset to be put into ClimNA.
 
 ```{r}
