@@ -26,7 +26,7 @@ We will be using ClimNA as our example for this workshop, which ***only works fo
 
 ## ClimNA example
 
-You will need to download the data file called "dasypus_novemcinctus_gbif.csv". This is a dataset of hummingbird clearwing moth (*Hemaris thysbe*) occurrences that I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries. You will also need to install the R package dismo.
+You will need to download the data file called **dasypus_novemcinctus_gbif.csv**. This is a dataset of hummingbird clearwing moth (*Hemaris thysbe*) occurrences that I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries. You will also need to install the R package dismo.
 
 ```{r}
 setwd("~/Desktop/UFBI workshop example/");
@@ -96,13 +96,13 @@ write.csv(unique_data, "Hemaris-ClimNA.csv", row.names = F)
 ```
 ### Running ClimNA
 
-Now we are actually ready to run the ClimNA program with the data we've cleaned. Open the ClimateNA_v5.21.exe file on your computer. If you have a Mac and have not installed Wine or the other necessary programs to run this Windows program, see at the top of this page because you will experience difficulties at this step. **This is why it is important to do this BEFORE coming to the workshop!** Otherwise, we will waste time troubleshooting Wine installation.
+Now we are actually ready to run the ClimNA program with the data we've cleaned. Open the **ClimateNA_v5.21.exe** file on your computer. If you have a Mac and have not installed Wine or the other necessary programs to run this Windows program, see at the top of this page because you will experience difficulties at this step. **This is why it is important to do this BEFORE coming to the workshop!** Otherwise, we will waste time troubleshooting Wine installation.
 
-At this step, it is important to open the Hemaris-clean-dates.csv file to check when our occurrences come from. For our particular example, the occurrences range from 1969 to 2017. Unfortunately, ClimNA only has data up until 2013. For simplicity's sake, it is probably best to delete the two occurrences that fall outside of ClimNA's range (shown highlighted in the image below).
+At this step, it is important to open the **Hemaris-clean-dates.csv** file to check when our occurrences come from. For our particular example, the occurrences range from 1969 to 2017. Unfortunately, ClimNA only has data up until 2013. For simplicity's sake, it is probably best to delete the two occurrences that fall outside of ClimNA's range (shown highlighted in the image below).
 
 <img src="https://lh3.googleusercontent.com/ffl5mW_x-L399HY3xu70OPznF_WGLqbnoCUflALsn0Ndxvt42_J_Fw5dnaku0Mg4BqG1N4mrJAqxQC9qPpjFhjGJqSoP3qcDebbh72L5ye3ed40AiX9r8TiZhzMtL3B_l1MFNp6IxVMeVEwJzeywCZYUhVFhgaM12ika89zGrLZLqKJ1pOW4btexYrFFIY_Llmqu9uBaVsoFgofgjPpdTXpjtZhp_L4PCk-BGlgP26gq1pcyPNk4Hj92hATpE3XYVk4JvUqK9Il6h9hjULrma3A4JyAwkzu1J2HYIYqLJYXzaxVv5Qg9Kp3RNLhGYFCV-VoUr1RcMqwP7vkfd_AsfIbVgsXkdMU-ukr8JYz5tkjBX3x9c1KujY0kkk-k8awKxZMHFnqIzMv3J2VQ_8f-3NEL0Dr0AtkbLF3sTuNANEZMRQyn7hWvR7AsFTKQhUvonhnuFM18TcevB7Yyfj9hKahbPjE68JcNQ4QuOPvYFI2O48SXJD8G-Xxw1Pfz0POU3A0yqMWsPD3gQyOL7ll6Ay-fZAVobcwdyV4tKmvrhUyXOXgTumjRub-joR3YLIuWWatJTgILINlYzHZcUIv0oFJn08rUYnM9Dpp1oRM=w934-h592-no" width="550" height="330"/>
 
-Note the ID1 and ID2 for these records, and delete them from the Hemaris-ClimNA.csv file and save it. You will need to save a blank spreadsheet as a .csv file for your output from ClimNA. Fill out the ClimNA interface with the appropriate input, output, and year range. We will discuss more about these options in the workshop. Click "Calculate TS".
+Note the ID1 and ID2 for these records, and delete them from the **Hemaris-ClimNA.csv** file and save it. You will need to save a blank spreadsheet as a .csv file for your output from ClimNA. Fill out the ClimNA interface with the appropriate input, output, and year range. We will discuss more about these options in the workshop. Click "Calculate TS".
 
 <img src="https://lh3.googleusercontent.com/pd2aFelNni0YcOglFZjjk2OYLCg2wofOeZ3zgcnahJkn5PdjBGxdMWLyiGZOv9IhDP0VjOsKaS2SqJwaa5ph3pDn_8pwLvwJSnpSlDZlriGwOEBTZ-cwiDIz5VQiJHDnIc3KLUWL8p6S-nENHgRMp0HuTQUrJDSVdK6ofUtpqd44cMkGmupPi331vaAZs_HQ5ewBnbIidy5VxuF3ScZ6dojSeZ2kH4dgtAJfP1OLdXS9v51rIKoCBd9lPxOWlPLToKPIUvPenpijxskXk2rHzmBh885947L3A_9Mk9wsECH5FrCX7oT3WZLHt9Gx5MZXdU0-_syG4lwQdxHtUltbbrfKQgcKzoHii9bYTkXIjHX0r-Zf6-gaGlXoqkUShpPpCY7s9Zsgw9AJ-Kucm7yD2oek9O5kXWzJ9Z2FkA-gsAoDks4_k0vbxBCQ9WRWDtWf_8QZYegK-gi47vr-tPZM0yFXsgu15HK-gfqbNwI3K5-LevyIGmIINQLog92_ZYpUu4MhLhpxQqN3FbCUCpFKv6S5pY_FJf8KuijoWX3jaI-VSECPMcVQp1YaQI_8ul6MLByFzu_CbIB7zCTtOA-rPfoYakuxqvy6XZhBwls=w1122-h1134-no" width="430" height="450"/>
 
