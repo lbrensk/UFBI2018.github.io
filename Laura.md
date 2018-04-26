@@ -43,6 +43,7 @@ library(readr)
 hemaris_gbif <- read_csv("~/Desktop/UFBI workshop example/Armadillo/dasypus-novemcinctus-gbif.csv")
 View(hemaris_gbif)
 ```
+### Cleaning data for ClimNA
 
 This dataset contains a lot more data than we need for running ClimNA. Let's first transform this into a data frame and extract only the necessary columns necessary: occurrenceID, publishing organization code, latitude, longitude, elevation, and event date.
 
@@ -108,3 +109,7 @@ Note the ID1 and ID2 for these records, and delete them from the Hemaris-ClimNA.
 If you open your output file, it should now have data in it. Because we ran these as a time series, you'll notice that all of our occurrences now have a row of data with every annual variable from ClimNA for every year from 1969-2013. The definitions of these annual climate variables can be found in the **help.rtf** ClimNA file.
 
 <img src="https://lh3.googleusercontent.com/H5fmi2X0CtQc8ULnfICRVaDf06kIJy91a2AAOSWFb1-rPupBJBfSoBxOHImFbAEPqiytxzTNt-R1YFCvgfYaaKq5oa76pvYFnJ_9uuSTXtkEIm89T1KZhx8igBi4BvqtOU7LW8GCA0UOYI-wJXapc_WPCz7EPA4CaL_AKXz68pwU6PL-ywD61BXlrflx25ssbYqf5vShUbq9dSXWRsqBO0Oc4TQ2aF_QBx4t9mp9A3rb4sGAnnQ1suaV20X3i4hfrXNv2G45pSE1s_3AcX8Nh_foHo4m7SOqc1gqe7CCSa9b_CgRkLc_bZXRR5iXkbquvEq33e_YpNkxa1myuSdu1jsuqcOERYr_KW4a7BwbLGLpFbBiIWRfUqjMsnb-l0YF_Al7W66_zGi-DBXbXRkMz7jk0x6c4HX70QYQdWpv-Eu8h3OWZQob450X22w87l-kVONNqKqj1vMZSmwI0Q1zNe0OgG0XGFWDStXyfMziN2wD1q0YaMQhikIVChDXeuJcn73Oel7BwJW9LT9FjrruRzTffN0FKY_OOHUpjTsYxAVtPDeXB71d13TUMLe1YuH5IMkBbGNCyOjAzoV63gZAMTRWvGKubEWtR3mbAfU=w900-h994-no" width="500" height="530"/>
+
+### Cleaning the ClimNA output
+
+Really, we only need the associated climate data from the year that the occurrence was recorded. In order to keep this example simple, we will only pull the MAT (mean annual temperature) and MAP (mean annual precipitation) for the year we need, and then we will use the biovars function to create climate variables from the data we have.
