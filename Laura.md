@@ -136,8 +136,9 @@ clean_dates$year <- format(as.Date(clean_dates$date, format = "%Y-%m-%d"), "%Y")
 Next we'll use the IDs to match our data and create a spreadsheet with only our records and the average temperatures from each month in the occurrence year.
 
 ```{r}
-subsetted_data <- all_data[all_data$ID2 == clean_dates$ID2 & all_data$ID1 == clean_dates$ID1 & all_data$Year == clean_dates$year & all_data$Latitude == clean_dates$lat & all_data$Elevation == clean_dates$el,c(1:6,31:42)]
+subsetted_data <- all_data[all_data$ID2 == clean_dates$ID2 & all_data$ID1 == clean_dates$ID1 & all_data$Year == clean_dates$year & all_data$Latitude == clean_dates$lat & all_data$Elevation == clean_dates$el,c(1:30,43:54)]
 merged_data <- merge(subsetted_data, clean_dates, by.x = c("Year", "Latitude", "Elevation", "ID1", "ID2"), by.y = c("year", "lat", "el", "ID1", "ID2"))
-final_data <- merged_data[,c(4:6,2:3,20,7:18)]
+final_data <- merged_data[,c(4:6,2:3,44,7:42)]
+write.csv(final_data, "hemaris-final-data.csv", row.names = F)
 ```
 <img src="https://lh3.googleusercontent.com/znJ6HU9Wn_W_9PSWco3uOEZQRhyxJHJb_qB7KMgwaHANM9utEVIAXsQUR-tChjmNefmqk979b6KcL5XPVA7YqIcEZxPlKLLp8tyqO3Rg4JayVpfVPLqEw_ethmy1xYPrewvzmRmfWewQAS1JtL4jt8iXek9EFi1NaXmQ0-2H7cu8i_2lMSPxVW84CUv0oDVHiZ3irc7crtkYbcKvOcnB8jFg76pON4ix1-O3bN7wILmdAad4LRz0KOzjxZQVxSbHXpwEMYqVkPVLW1EH4vqwnuTiqTPsEX7_55EWbcyV5P9LZnV-i2TFVluj38XJHRPiQHtKZrXPT0NnQDdH2LR2fd0JvKUlkGih3Thz-_0hwPvkbp-nsOubZ_zNpD73-FjHdU3FbRgPaCuGg_mlh0o_PtWkNWLXnNgQbtHEMgmKNzF_1toFczbvwwGm_suaJ1JvfIf80rQw1FLhvOs2p4WYs16eDVWH9xE_5wZVHR7ctkZgLP3vWPlSQki0pES6S6PkloDXWaBDU3V5I4jewveYQ-dMV98JV2HGsaDHI9gZJuV3JoPJTYCvzezcq3uOWcdLTU0jsh0ntVMiSQmp9fSxuTD37uaY7xRmy6W8xt8=w2342-h506-no">
