@@ -113,3 +113,30 @@ If you open your output file, it should now have data in it. Because we ran thes
 ### Cleaning the ClimNA output
 
 Really, we only need the associated climate data from the year that the occurrence was recorded. In order to keep this example simple, we will only pull the average temperature for each month for the year we need, and then we will use the biovars function to create climate variables from the data we have.
+
+```{r}
+all_data <- read.csv("hemaris-output-monthly.csv")
+clean_dates <- read.csv("Hemaris-clean-dates.csv")
+```
+Somehow ClimNA managed to garble some of observational data's identification codes. We'll fix that because we need them to be the same to match between the output and the spreadsheet with the dates.
+
+```{r}
+levels(all_data$ID1)[levels(all_data$ID1)=="2.7E+67"] <- "27e66ae6-7b71-4f15-bd0e-052a9cf67afa"
+levels(all_data$ID1)[levels(all_data$ID1)=="8"] <- "08BBLEP-01675"
+all_data$ID1 <- as.character(all_data$ID1)
+all_data$ID1[all_data$ID1 == "10" & all_data$Elevation == "1146"] <- "10BBCLP-0319"
+all_data$ID1[all_data$ID1 == "10" & all_data$Elevation == "1137"] <- "10BBCLP-0320"
+```
+
+Next, we'll normalize the dates to make a separate year column.
+
+```{r}
+clean_dates$year <- format(as.Date(clean_dates$date, format = "%Y-%m-%d"), "%Y")
+```
+Next we'll use the IDs to match our data and create a spreadsheet with only our records and the average temperatures from each month in the occurrence year.
+
+```{r}
+subsetted_data <- all_data[all_data$ID2 == clean_dates$ID2 & all_data$ID1 == clean_dates$ID1 & all_data$Year == clean_dates$year & all_data$Latitude == clean_dates$lat & all_data$Elevation == clean_dates$el,c(1:6,31:42)]
+merged_data <- merge(subsetted_data, clean_dates, by.x = c("Year", "Latitude", "Elevation", "ID1", "ID2"), by.y = c("year", "lat", "el", "ID1", "ID2"))
+final_data <- merged_data[,c(4:6,2:3,20,7:18)]
+```
