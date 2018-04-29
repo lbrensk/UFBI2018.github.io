@@ -39,8 +39,8 @@ library(dismo);
 Load the dataset you downloaded into R.
 
 ```{r}
-library(readr)
-hemaris_gbif <- read_csv("~/Desktop/UFBI workshop example/Armadillo/dasypus-novemcinctus-gbif.csv")
+library(readxl)
+hemaris_gbif <- read_excel("~/Desktop/UFBI workshop example/hemaris_thysbe-gbif.xlsx")
 View(hemaris_gbif)
 ```
 ### Cleaning data for ClimNA
