@@ -142,3 +142,27 @@ final_data <- merged_data[,c(4:6,2:3,44,7:42)]
 write.csv(final_data, "hemaris-final-data.csv", row.names = F)
 ```
 <img src="https://lh3.googleusercontent.com/VXjLdawm5OsbJnL8cWqtcBWT8E0nJeN9ALSG97n4rCKxEZKniG3ptAcy5sA5ryNh4CcDOdEkFXaLqW0xZnHYvJ-Fps9S0-vXRJPtzj1YIGbPlSzcrRMvkcUUlMsM_CVMSZBvH9c9QuMWjXJH2ggZwQ_EhcBsLYvSaU7D8BEua63VAD87KxOMPYvaqsNuFa11YL8VE7CtLDvKCJgEq5pORB5-IkvJmeQd6LuxGiM28Sb9TyyL1rnyc79gYrxioNeDYdTG7YmGROQ1YxMCjRGOT9o9R7dhtdGhN9H4rn5ly3wyVKpGO5mpsxKjJU3kSWsx4lO9rLaBNwX6922xWFGiVNbRcHzp5Aa92MvfjSWNyz59-iugjsvwpI7ns_oKxoih2wFXte1rhP3ZrjXAhvzhRDL6Vl2nzlRpmxIkQncEK5J3A0k0EhH4pNSKki7i1aQWspPhjLiQnVF_kWrJh9ixVxrHD54pkzFVpfRRYR39WJa4v7zq_KeiCa2Cc-_yZuxQ0Bgizlud7u02EnjrrCQf0zTK9x06qVlmEeaflVohvXASYge3Ltmy_w69j6EbJV8dAECU54tzwvjcyK-UZUwltDD8CLe-671PqQEckcc=w2342-h486-no">
+
+Now, let's use the biovars function from the dismo package to create bioclimatic variables for each of our occurrences.
+
+```{r}
+x = 1
+iterations = 14
+variables = 19
+biovarsoutput <- matrix(ncol=variables, nrow=iterations)
+repeat {
+occ <- as.numeric(hemaris_final_data[x,7:42])
+tmax <- occ[1:12]
+tmin <- occ[13:24]
+precip <- occ[25:36]
+biovarsoutput[x,] <- biovars(precip, tmin, tmax)
+x = x+1
+if (x == 14) {
+break
+}}
+biovarsoutput <- as.data.frame(biovarsoutput)
+names(biovarsoutput) <- c("bio1", "bio2", "bio3", "bio4", "bio5", "bio6", "bio7", "bio8", "bio9", "bio10", "bio11", "bio12", "bio13", "bio14", "bio15", "bio16", "bio17", "bio18", "bio19")
+View(biovarsoutput)
+```
+
+**Congratulations!** You have created your own customized bioclimatic variables for each occurrence that can be used in modeling.
