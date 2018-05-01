@@ -18,7 +18,7 @@ If you have a Mac, you may require a few other programs to run ClimNA, which is 
 
 ## Climate data resources overview
 
-We will be using ClimNA as our example for this workshop, which ***only works for occurrences in North America***. Be aware that there are other resources available for **South America** and **Europe**: [https://sites.ualberta.ca/~ahamann/data.html](https://sites.ualberta.ca/~ahamann/data.html).<br>These should have very similar functionalities to what we're learning in the workshop.
+We will be using ClimNA as our example for this workshop, which ***only works for occurrences in North America***. Be aware that there are other resources available for **South America** and **Europe**: [https://sites.ualberta.ca/~ahamann/data.html](https://sites.ualberta.ca/~ahamann/data.html)<br>These should have very similar functionalities to what we're learning in the workshop.
 
 **WorldClim** - [http://worldclim.org/](http://worldclim.org/)
 
