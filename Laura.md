@@ -22,11 +22,12 @@ We will be using ClimNA as our example for this workshop, which ***only works fo
 
 **WorldClim** - [http://worldclim.org/](http://worldclim.org/)
 
+**ECMWF** - Hourly data; [http://apps.ecmwf.int/datasets/data/interim-full-daily/levtype=sfc/](http://apps.ecmwf.int/datasets/data/interim-full-daily/levtype=sfc/) May need to create an account to download datasets.
 ***
 
 ## ClimNA example
 
-You will need to download the data file called **dasypus_novemcinctus_gbif.csv**. This is a dataset of hummingbird clearwing moth (*Hemaris thysbe*) occurrences that I downloaded directly from GBIF's website and converted into a .csv file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries. You will also need to install the R package dismo.
+You will need to download the data file called **hemaris_thysbe-gbif.xls** from the Google Drive: [https://drive.google.com/open?id=1CbBDCiBKxBoWokZc40LJo5nmwDZf7hBl](https://drive.google.com/open?id=1CbBDCiBKxBoWokZc40LJo5nmwDZf7hBl). This is a dataset of hummingbird clearwing moth (*Hemaris thysbe*) occurrences that I downloaded directly from GBIF's website and converted into a .xls file. We will clean it to prepare it for ClimNA using R. First, set your working directory if you have not already and load the required libraries. You will also need to install the R package dismo.
 
 ```{r}
 setwd("~/Desktop/UFBI workshop example/");
@@ -40,7 +41,7 @@ Load the dataset you downloaded into R.
 
 ```{r}
 library(readxl)
-hemaris_gbif <- read_excel("~/Desktop/UFBI workshop example/hemaris_thysbe-gbif.xlsx")
+hemaris_gbif <- read_excel("~/Desktop/UFBI workshop example/hemaris_thysbe-gbif.xls")
 View(hemaris_gbif)
 ```
 ### Cleaning data for ClimNA
