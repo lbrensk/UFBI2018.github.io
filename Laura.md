@@ -23,6 +23,7 @@ We will be using ClimNA as our example for this workshop, which ***only works fo
 **WorldClim** - [http://worldclim.org/](http://worldclim.org/)
 
 **ECMWF** - Hourly data; [http://apps.ecmwf.int/datasets/data/interim-full-daily/levtype=sfc/](http://apps.ecmwf.int/datasets/data/interim-full-daily/levtype=sfc/) May need to create an account to download datasets.
+Other ECMWF datasets: [http://apps.ecmwf.int/datasets/](http://apps.ecmwf.int/datasets/)
 ***
 
 ## ClimNA example
